@@ -1,8 +1,8 @@
 ---
 const {
-        title = 'VetRural | Veterinaria a domicilio para comunidades rurales',
+        title = 'Ponyvet | Veterinaria a domicilio para comunidades rurales',
         description =
-                'Atención veterinaria para ganado, equinos y mascotas en zonas rurales con servicio a domicilio las 24 horas.',
+                'Atención veterinaria móvil para ganado, equinos y mascotas rurales con visitas programadas directamente en tu comunidad.',
 } = Astro.props;
 const fontHref =
         'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap';
@@ -14,7 +14,7 @@ const fontHref =
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="description" content={description} />
                 <meta name="generator" content={Astro.generator} />
-                <meta name="theme-color" content="#2f7c4c" />
+                <meta name="theme-color" content="#2A6F97" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -34,14 +34,14 @@ const fontHref =
 <style is:global>
         :root {
                 color-scheme: light;
-                --primary: #2f7c4c;
-                --primary-dark: #225e38;
-                --accent: #f2b950;
-                --bg: #f6f2eb;
+                --primary: #2a6f97;
+                --primary-dark: #1e4d68;
+                --accent: #f2a65a;
+                --bg: #f4f9fb;
                 --surface: #ffffff;
-                --text: #1f2a24;
-                --muted: #4f5d52;
-                --shadow: 0 32px 80px -44px rgba(31, 42, 36, 0.45);
+                --text: #1e2a32;
+                --muted: #556c76;
+                --shadow: 0 32px 80px -44px rgba(17, 34, 44, 0.45);
         }
 
         *,
@@ -69,9 +69,9 @@ const fontHref =
                 inset: 0;
                 pointer-events: none;
                 background:
-                        radial-gradient(circle at 15% 20%, rgba(47, 124, 76, 0.18), transparent 55%),
-                        radial-gradient(circle at 85% 10%, rgba(242, 185, 80, 0.16), transparent 45%),
-                        radial-gradient(circle at 20% 85%, rgba(34, 94, 56, 0.14), transparent 55%);
+                        radial-gradient(circle at 15% 20%, rgba(42, 111, 151, 0.18), transparent 55%),
+                        radial-gradient(circle at 85% 10%, rgba(242, 166, 90, 0.18), transparent 45%),
+                        radial-gradient(circle at 20% 85%, rgba(30, 77, 104, 0.16), transparent 55%);
                 z-index: -1;
         }
 
@@ -95,6 +95,6 @@ const fontHref =
         }
 
         ::selection {
-                background: rgba(242, 185, 80, 0.5);
+                background: rgba(242, 166, 90, 0.5);
         }
 </style>
