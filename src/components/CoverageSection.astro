@@ -116,16 +116,15 @@ const phoneHoursLabel = formatHourRange(phoneHours);
   <div class="coverage-text">
     <h2>Zona de cobertura</h2>
     <p>
-      Atendemos ranchos, ejidos y comunidades dentro de un radio de
-      {coverageRadiusLabel}. Nuestra base está en {baseAreaLabel} y llegamos con
-      unidades 4x4 y kits completos de atención.
+      Atendemos domicilios  dentro de un radio de
+      {coverageRadiusLabel}. Nuestra base está en {baseAreaLabel} y llegamos 
+      hasta tu comunidad.
     </p>
     <ul class="coverage-list">
       {coverageAreasToDisplay.map((area) => (
         <li>{area}</li>
       ))}
     </ul>
-    <span class="coverage-badge">{travelPolicyLabel}</span>
   </div>
   <div class="coverage-panels">
     <div class="panel">
@@ -144,12 +143,11 @@ const phoneHoursLabel = formatHourRange(phoneHours);
       {phoneNumber && phoneDisplay && (
         <a href={`tel:${phoneNumber}`}>
           Llamada directa {phoneDisplay}
-          {phoneHoursLabel && ` (${phoneHoursLabel})`}
         </a>
       )}
       {whatsappLink && (
         <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-          WhatsApp{whatsappHoursLabel && ` (${whatsappHoursLabel})`}
+          WhatsApp
         </a>
       )}
       {email && <a href={`mailto:${email}`}>{email}</a>}
@@ -194,10 +192,14 @@ const phoneHoursLabel = formatHourRange(phoneHours);
   .coverage-list li {
     background: rgba(42, 111, 151, 0.12);
     border-radius: 999px;
-    padding: 0.65rem 1rem;
+    padding: 0.4rem 1rem;
     font-weight: 600;
     color: var(--primary-dark);
     text-align: center;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
   }
 
   .coverage-badge {

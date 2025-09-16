@@ -102,14 +102,14 @@ const displayYear = currentYear ?? new Date().getFullYear();
     <div class="footer-contact">
       {phoneNumber && phoneDisplay && (
         <span>
-          Teléfono{phoneHoursLabel && ` (${phoneHoursLabel})`}:
+          Teléfono:
           {' '}
           <a href={`tel:${phoneNumber}`}>{phoneDisplay}</a>
         </span>
       )}
       {whatsappLink && phoneDisplay && (
         <span>
-          WhatsApp{whatsappHoursLabel && ` (${whatsappHoursLabel})`}:
+          WhatsApp:
           {' '}
           <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
             {phoneDisplay}
