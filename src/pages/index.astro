@@ -9,38 +9,53 @@ import TestimonialsSection from "@components/TestimonialsSection.astro";
 import CoverageSection from "@components/CoverageSection.astro";
 import FinalCTA from "@components/FinalCTA.astro";
 import SiteFooter from "@components/SiteFooter.astro";
+import companyInfo from "../data/company-info.json";
 
-const phoneNumber = "+524461234567";
-const phoneDisplay = "(446) 123 4567";
-const whatsappLink = "https://wa.me/524461234567";
-const email = "contacto@ponyvet.mx";
-const pageTitle = "Ponyvet | Veterinaria a domicilio para comunidades rurales";
-const pageDescription =
-  "Atención veterinaria móvil para ganado, equinos y mascotas en zonas rurales del Valle Verde. Consultas preventivas, apoyo en urgencias dentro del horario y planes sanitarios sin salir del predio.";
+const { company, contact } = companyInfo;
+
+const phoneNumber = contact.phone.international;
+const phoneDisplay = contact.phone.display;
+const whatsappLink = contact.whatsapp.link;
+const email = contact.email;
+const pageTitle = company.seo.title;
+const pageDescription = company.seo.description;
 const currentYear = new Date().getFullYear();
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <Navbar phoneNumber={phoneNumber} phoneDisplay={phoneDisplay} />
+  <Navbar
+    brandName={company.name}
+    phoneNumber={phoneNumber}
+    phoneDisplay={phoneDisplay}
+  />
   <main>
-    <HeroSection whatsappLink={whatsappLink} />
+    <HeroSection
+      companyName={company.name}
+      tagline={company.tagline}
+      description={company.description}
+      highlights={company.highlights}
+      stats={company.statistics}
+      whatsappLink={whatsappLink}
+      serviceHours={company.serviceHours}
+    />
     <ServicesSection />
     <HowItWorksSection />
     <BenefitsSection />
     <TestimonialsSection />
     <CoverageSection
-      phoneNumber={phoneNumber}
-      phoneDisplay={phoneDisplay}
-      whatsappLink={whatsappLink}
-      email={email}
+      coverage={company.coverage}
+      serviceHours={company.serviceHours}
+      contact={contact}
+      baseLocation={company.baseLocation}
     />
-    <FinalCTA whatsappLink={whatsappLink} email={email} />
+    <FinalCTA contact={contact} serviceHours={company.serviceHours} />
   </main>
   <SiteFooter
-    phoneNumber={phoneNumber}
-    phoneDisplay={phoneDisplay}
-    whatsappLink={whatsappLink}
-    email={email}
+    companyName={company.name}
+    tagline={company.tagline}
+    description={company.description}
+    contact={contact}
+    baseLocation={company.baseLocation}
     currentYear={currentYear}
   />
 </Layout>

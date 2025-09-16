@@ -1,29 +1,66 @@
 ---
 import Icon from "@components/Icon.astro";
 
-const { whatsappLink } = Astro.props;
+const {
+  companyName = "Ponyvet",
+  tagline = "Veterinaria rural a domicilio",
+  description = [],
+  highlights = [],
+  stats = [],
+  whatsappLink,
+  serviceHours,
+} = Astro.props;
 
-const highlights = [
+const heroDescription = description.length
+  ? description
+  : [
+      "Consultas preventivas, seguimiento sanitario y atención a urgencias dentro de nuestro horario extendido. Nuestro equipo móvil llega directamente a tu rancho o comunidad con el equipamiento necesario.",
+    ];
+
+const defaultHighlights = [
   "Respuesta garantizada en menos de 24 horas dentro del Valle Verde",
   "Clínica móvil equipada para ganado, equinos y mascotas rurales",
   "Atendemos de lunes a domingo de 8:00 a 19:00 hrs",
 ];
 
-const stats = [
+const highlightsToDisplay =
+  highlights.length > 0 ? highlights : defaultHighlights;
+
+const defaultStats = [
   { value: "+350", label: "visitas a campo cada año" },
   { value: "96%", label: "casos resueltos sin traslado" },
 ];
+
+const statsToDisplay = stats.length > 0 ? stats : defaultStats;
+
+const formatServiceHours = (hours) => {
+  if (!hours) return null;
+  const { days, opening, closing } = hours;
+
+  if (days && opening && closing) {
+    return `${opening} a ${closing} hrs, ${days.toLowerCase()}`;
+  }
+
+  if (opening && closing) {
+    return `${opening} a ${closing} hrs`;
+  }
+
+  return days ?? null;
+};
+
+const serviceHoursLabel =
+  formatServiceHours(serviceHours) ?? "8:00 a 19:00 hrs, todos los días";
 ---
 
 <section class="hero" id="inicio">
   <div class="hero-content">
-    <span class="eyebrow">Veterinaria rural a domicilio</span>
-    <h1>Ponyvet llega a tu rancho para cuidar a tus animales</h1>
-    <p>
-      Consultas preventivas, seguimiento sanitario y atención a urgencias dentro
-      de nuestro horario extendido. Nuestro equipo móvil llega directamente a tu
-      rancho o comunidad con el equipamiento necesario.
-    </p>
+    <span class="eyebrow">{tagline}</span>
+    <h1>{companyName} llega a tu rancho para cuidar a tus animales</h1>
+    {
+      heroDescription.map((paragraph, index) => (
+        <p key={`hero-description-${index}`}>{paragraph}</p>
+      ))
+    }
     <div class="cta-group">
       <a
         class="cta primary"
@@ -40,14 +77,12 @@ const stats = [
       </a>
     </div>
     <ul class="hero-highlights">
-      {
-        highlights.map((highlight) => (
-          <li key={highlight}>
-            <Icon name="check" class="list-icon" size={18} aria-hidden="true" />
-            {highlight}
-          </li>
-        ))
-      }
+      {highlightsToDisplay.map((highlight) => (
+        <li key={highlight}>
+          <Icon name="check" class="list-icon" size={18} aria-hidden="true" />
+          {highlight}
+        </li>
+      ))}
     </ul>
   </div>
   <div class="hero-card">
@@ -57,16 +92,14 @@ const stats = [
       traslades a tus animales.
     </p>
     <dl class="stats">
-      {
-        stats.map((item) => (
-          <div>
-            <dt>{item.value}</dt>
-            <dd>{item.label}</dd>
-          </div>
-        ))
-      }
+      {statsToDisplay.map((item) => (
+        <div key={item.value}>
+          <dt>{item.value}</dt>
+          <dd>{item.label}</dd>
+        </div>
+      ))}
     </dl>
-    <p class="small">Horario de atención: 8:00 a 19:00 hrs, todos los días.</p>
+    <p class="small">Horario de atención: {serviceHoursLabel}.</p>
   </div>
 </section>
 
