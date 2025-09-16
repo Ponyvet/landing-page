@@ -1,9 +1,30 @@
 ---
 import Icon from "@components/Icon.astro";
 
-const { contact = {}, serviceHours } = Astro.props;
+type ServiceHours = {
+  days?: string;
+  opening?: string;
+  closing?: string;
+};
 
-const formatServiceWindow = (hours) => {
+type ContactDetails = {
+  whatsapp?: {
+    link?: string;
+    hours?: string | null;
+  };
+  email?: string;
+};
+
+type FinalCTAProps = {
+  contact?: ContactDetails;
+  serviceHours?: ServiceHours;
+};
+
+const { contact, serviceHours } = Astro.props satisfies FinalCTAProps;
+
+const formatServiceWindow = (
+  hours: ServiceHours | null | undefined,
+): string | null => {
   if (!hours) return null;
   const { days, opening, closing } = hours;
 
@@ -18,7 +39,7 @@ const formatServiceWindow = (hours) => {
   return days ? `de ${days.toLowerCase()}` : null;
 };
 
-const formatContactHours = (value) => {
+const formatContactHours = (value: string | null | undefined): string | null => {
   if (!value) return null;
   const trimmed = value.trim();
 
@@ -37,11 +58,11 @@ const serviceWindowLabel =
   "de lunes a domingo entre las 8:00 y las 19:00 hrs";
 
 const whatsappLink =
-  contact.whatsapp?.link ?? "https://wa.me/524461234567";
-const email = contact.email ?? "contacto@ponyvet.mx";
-const whatsappHoursLabel = formatContactHours(contact.whatsapp?.hours);
+  contact?.whatsapp?.link ?? "https://wa.me/524461234567";
+const email = contact?.email ?? "contacto@ponyvet.mx";
+const whatsappHoursLabel = formatContactHours(contact?.whatsapp?.hours ?? null);
 ---
----
+
 
 <section id="contacto" class="cta-final">
   <h2>Coordinemos la próxima visita de Ponyvet</h2>

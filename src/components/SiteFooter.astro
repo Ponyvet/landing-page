@@ -1,14 +1,47 @@
 ---
+type ContactPhone = {
+  international?: string;
+  display?: string;
+  hours?: string | null;
+};
+
+type ContactWhatsapp = {
+  link?: string;
+  hours?: string | null;
+  notes?: string;
+};
+
+type ContactDetails = {
+  phone?: ContactPhone;
+  whatsapp?: ContactWhatsapp;
+  email?: string;
+  baseLocation?: string;
+};
+
+type BaseLocation = {
+  community?: string;
+  state?: string;
+};
+
+type SiteFooterProps = {
+  companyName?: string;
+  tagline?: string;
+  description?: string[];
+  contact?: ContactDetails;
+  baseLocation?: BaseLocation;
+  currentYear?: number;
+};
+
 const {
   companyName = "Ponyvet",
   tagline = "Veterinaria rural a domicilio",
   description = [],
-  contact = {},
+  contact,
   baseLocation,
   currentYear,
-} = Astro.props;
+} = Astro.props satisfies SiteFooterProps;
 
-const formatContactHours = (value) => {
+const formatContactHours = (value: string | null | undefined): string | null => {
   if (!value) return null;
   const trimmed = value.trim();
 
@@ -22,22 +55,22 @@ const formatContactHours = (value) => {
   return trimmed;
 };
 
-const phoneNumber = contact.phone?.international ?? "+524461234567";
-const phoneDisplay = contact.phone?.display ?? "(446) 123 4567";
-const phoneHoursLabel = formatContactHours(contact.phone?.hours);
+const phoneNumber = contact?.phone?.international ?? "+524461234567";
+const phoneDisplay = contact?.phone?.display ?? "(446) 123 4567";
+const phoneHoursLabel = formatContactHours(contact?.phone?.hours ?? null);
 
-const whatsappLink = contact.whatsapp?.link ?? "https://wa.me/524461234567";
-const whatsappHoursLabel = formatContactHours(contact.whatsapp?.hours);
+const whatsappLink = contact?.whatsapp?.link ?? "https://wa.me/524461234567";
+const whatsappHoursLabel = formatContactHours(contact?.whatsapp?.hours ?? null);
 
-const email = contact.email ?? "contacto@ponyvet.mx";
+const email = contact?.email ?? "contacto@ponyvet.mx";
 
 const contactLocation =
-  contact.baseLocation ??
+  contact?.baseLocation ??
   (baseLocation?.community && baseLocation?.state
     ? `${baseLocation.community}, ${baseLocation.state}`
     : "Valle Verde, Querétaro");
 
-const summaryParagraphs =
+const summaryParagraphs: string[] =
   description.length > 0
     ? description
     : [
@@ -46,17 +79,15 @@ const summaryParagraphs =
 
 const displayYear = currentYear ?? new Date().getFullYear();
 ---
----
+
 
 <footer>
   <div class="footer-inner">
     <div>
       <div class="footer-logo">{companyName}</div>
       <span class="footer-tagline">{tagline}</span>
-      {summaryParagraphs.map((text, index) => (
-        <p class="footer-description" key={`footer-description-${index}`}>
-          {text}
-        </p>
+      {summaryParagraphs.map((text) => (
+        <p class="footer-description">{text}</p>
       ))}
     </div>
     <nav class="footer-nav" aria-label="Navegación secundaria">
@@ -92,7 +123,7 @@ const displayYear = currentYear ?? new Date().getFullYear();
           <a href={`mailto:${email}`}>{email}</a>
         </span>
       )}
-      {contact.whatsapp?.notes && <span>{contact.whatsapp.notes}</span>}
+      {contact?.whatsapp?.notes && <span>{contact.whatsapp.notes}</span>}
       {contactLocation && <span>Ubicación base: {contactLocation}</span>}
     </div>
   </div>

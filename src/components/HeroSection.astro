@@ -1,6 +1,27 @@
 ---
 import Icon from "@components/Icon.astro";
 
+type ServiceHours = {
+  days?: string;
+  opening?: string;
+  closing?: string;
+};
+
+type Stat = {
+  value: string;
+  label: string;
+};
+
+type HeroProps = {
+  companyName?: string;
+  tagline?: string;
+  description?: string[];
+  highlights?: string[];
+  stats?: Stat[];
+  whatsappLink?: string;
+  serviceHours?: ServiceHours | null;
+};
+
 const {
   companyName = "Ponyvet",
   tagline = "Veterinaria rural a domicilio",
@@ -9,9 +30,9 @@ const {
   stats = [],
   whatsappLink,
   serviceHours,
-} = Astro.props;
+} = Astro.props satisfies HeroProps;
 
-const heroDescription = description.length
+const heroDescription: string[] = description.length
   ? description
   : [
       "Consultas preventivas, seguimiento sanitario y atención a urgencias dentro de nuestro horario extendido. Nuestro equipo móvil llega directamente a tu rancho o comunidad con el equipamiento necesario.",
@@ -23,7 +44,7 @@ const defaultHighlights = [
   "Atendemos de lunes a domingo de 8:00 a 19:00 hrs",
 ];
 
-const highlightsToDisplay =
+const highlightsToDisplay: string[] =
   highlights.length > 0 ? highlights : defaultHighlights;
 
 const defaultStats = [
@@ -31,9 +52,11 @@ const defaultStats = [
   { value: "96%", label: "casos resueltos sin traslado" },
 ];
 
-const statsToDisplay = stats.length > 0 ? stats : defaultStats;
+const statsToDisplay: Stat[] = stats.length > 0 ? stats : defaultStats;
 
-const formatServiceHours = (hours) => {
+const formatServiceHours = (
+  hours: ServiceHours | null | undefined,
+): string | null => {
   if (!hours) return null;
   const { days, opening, closing } = hours;
 
@@ -56,11 +79,9 @@ const serviceHoursLabel =
   <div class="hero-content">
     <span class="eyebrow">{tagline}</span>
     <h1>{companyName} llega a tu rancho para cuidar a tus animales</h1>
-    {
-      heroDescription.map((paragraph, index) => (
-        <p key={`hero-description-${index}`}>{paragraph}</p>
-      ))
-    }
+    {heroDescription.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
     <div class="cta-group">
       <a
         class="cta primary"
@@ -78,7 +99,7 @@ const serviceHoursLabel =
     </div>
     <ul class="hero-highlights">
       {highlightsToDisplay.map((highlight) => (
-        <li key={highlight}>
+        <li>
           <Icon name="check" class="list-icon" size={18} aria-hidden="true" />
           {highlight}
         </li>
@@ -93,7 +114,7 @@ const serviceHoursLabel =
     </p>
     <dl class="stats">
       {statsToDisplay.map((item) => (
-        <div key={item.value}>
+        <div>
           <dt>{item.value}</dt>
           <dd>{item.label}</dd>
         </div>

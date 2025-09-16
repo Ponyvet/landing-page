@@ -1,23 +1,58 @@
 ---
-const {
-  coverage = {},
-  serviceHours,
-  contact = {},
-  baseLocation,
-} = Astro.props;
+type ServiceHours = {
+  days?: string;
+  opening?: string;
+  closing?: string;
+  notes?: string[];
+};
 
-const coverageAreas = coverage.areas ?? [];
-const coverageRadius = coverage.radius;
-const travelPolicy = coverage.travelPolicy;
+type ContactDetails = {
+  phone?: {
+    international?: string;
+    display?: string;
+    hours?: string | null;
+  };
+  whatsapp?: {
+    link?: string;
+    hours?: string | null;
+  };
+  email?: string;
+  baseLocation?: string;
+};
 
-const phoneNumber = contact.phone?.international;
-const phoneDisplay = contact.phone?.display;
-const phoneHours = contact.phone?.hours;
-const whatsappLink = contact.whatsapp?.link;
-const whatsappHours = contact.whatsapp?.hours;
-const email = contact.email;
+type BaseLocation = {
+  community?: string;
+  state?: string;
+};
 
-const formatHourRange = (value) => {
+type CoverageDetails = {
+  areas?: string[];
+  radius?: string;
+  travelPolicy?: string;
+};
+
+type CoverageProps = {
+  coverage?: CoverageDetails;
+  serviceHours?: ServiceHours;
+  contact?: ContactDetails;
+  baseLocation?: BaseLocation;
+};
+
+const { coverage, serviceHours, contact, baseLocation } =
+  Astro.props satisfies CoverageProps;
+
+const coverageAreas = coverage?.areas ?? [];
+const coverageRadius = coverage?.radius;
+const travelPolicy = coverage?.travelPolicy;
+
+const phoneNumber = contact?.phone?.international;
+const phoneDisplay = contact?.phone?.display;
+const phoneHours = contact?.phone?.hours ?? null;
+const whatsappLink = contact?.whatsapp?.link;
+const whatsappHours = contact?.whatsapp?.hours ?? null;
+const email = contact?.email;
+
+const formatHourRange = (value: string | null | undefined): string | null => {
   if (!value) return null;
   const trimmed = value.trim();
 
@@ -37,13 +72,13 @@ const serviceNotes = serviceHours
         ? `${serviceHours.days}: ${serviceHours.opening} - ${serviceHours.closing} hrs`
         : serviceHours.days,
       ...(serviceHours.notes ?? []),
-    ].filter(Boolean)
+    ].filter((note): note is string => Boolean(note))
   : [];
 
 const baseArea =
   baseLocation?.community && baseLocation?.state
     ? `${baseLocation.community}, ${baseLocation.state}`
-    : contact.baseLocation;
+    : contact?.baseLocation;
 const defaultCoverageAreas = [
   "Valle Verde",
   "San Miguel de la Sierra",
@@ -53,7 +88,7 @@ const defaultCoverageAreas = [
   "Santa Lucía",
 ];
 
-const coverageAreasToDisplay =
+const coverageAreasToDisplay: string[] =
   coverageAreas.length > 0 ? coverageAreas : defaultCoverageAreas;
 
 const coverageRadiusLabel =
@@ -68,7 +103,7 @@ const defaultServiceNotes = [
   "Confirmación previa vía WhatsApp",
 ];
 
-const notesToDisplay =
+const notesToDisplay: string[] =
   serviceNotes.length > 0 ? serviceNotes : defaultServiceNotes;
 
 const baseAreaLabel = baseArea ?? "Valle Verde, Querétaro";
@@ -87,7 +122,7 @@ const phoneHoursLabel = formatHourRange(phoneHours);
     </p>
     <ul class="coverage-list">
       {coverageAreasToDisplay.map((area) => (
-        <li key={area}>{area}</li>
+        <li>{area}</li>
       ))}
     </ul>
     <span class="coverage-badge">{travelPolicyLabel}</span>
@@ -96,8 +131,8 @@ const phoneHoursLabel = formatHourRange(phoneHours);
     <div class="panel">
       <h3>Horarios de visita</h3>
       <ul>
-        {notesToDisplay.map((note, index) => (
-          <li key={`service-note-${index}`}>{note}</li>
+        {notesToDisplay.map((note) => (
+          <li>{note}</li>
         ))}
       </ul>
     </div>
