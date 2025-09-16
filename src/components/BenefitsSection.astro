@@ -1,21 +1,7 @@
 ---
-const benefits = [
-  {
-    title: "Equipo especializado rural",
-    description:
-      "Veterinarios con experiencia en producción bovina, caprina y equina, certificados en medicina preventiva.",
-  },
-  {
-    title: "Transparencia y seguimiento",
-    description:
-      "Reportes digitales después de cada visita, historial compartido y recordatorios de vacunación sin costo extra.",
-  },
-  {
-    title: "Planes flexibles",
-    description:
-      "Paquetes mensuales y atención por evento para adaptarnos a las necesidades de cada rancho o comunidad.",
-  },
-];
+import { BENEFITS, type Benefit } from "../utils/constants";
+
+const benefits: Benefit[] = BENEFITS;
 ---
 
 <section id="beneficios" class="benefits">
@@ -29,7 +15,7 @@ const benefits = [
   <ul class="feature-list">
     {
       benefits.map((benefit) => (
-        <li key={benefit.title}>
+        <li>
           <h3>{benefit.title}</h3>
           <p>{benefit.description}</p>
         </li>

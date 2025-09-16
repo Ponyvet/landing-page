@@ -1,24 +1,7 @@
 ---
-const steps = [
-  {
-    number: "1",
-    title: "Solicita una visita",
-    description:
-      "Agenda por WhatsApp o teléfono y cuéntanos qué animales requieren atención.",
-  },
-  {
-    number: "2",
-    title: "Llegamos preparados",
-    description:
-      "Un médico veterinario especializado se desplaza con el equipamiento necesario para resolver en el predio.",
-  },
-  {
-    number: "3",
-    title: "Seguimiento continuo",
-    description:
-      "Recibe recomendaciones y recordatorios digitales para mantener al día la salud de tu hato.",
-  },
-];
+import { HOW_IT_WORKS_STEPS, type Step } from "../utils/constants";
+
+const steps: Step[] = HOW_IT_WORKS_STEPS;
 ---
 
 <section id="como-funciona" class="how-it-works">
@@ -32,7 +15,7 @@ const steps = [
   <ol class="steps">
     {
       steps.map((step) => (
-        <li key={step.number}>
+        <li>
           <span class="step-number">{step.number}</span>
           <h3>{step.title}</h3>
           <p>{step.description}</p>

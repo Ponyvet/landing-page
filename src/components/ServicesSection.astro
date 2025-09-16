@@ -1,32 +1,8 @@
 ---
 import Icon from "@components/Icon.astro";
+import { SERVICES, type Service } from "../utils/constants";
 
-const services = [
-  {
-    icon: "clipboard-check",
-    title: "Consultas preventivas y planes sanitarios",
-    description:
-      "Calendarios de vacunación, desparasitación y chequeos generales para mantener al hato saludable todo el año.",
-  },
-  {
-    icon: "briefcase-medical",
-    title: "Emergencias y cirugías de campo",
-    description:
-      "Atención prioritaria dentro del horario extendido para partos complicados, lesiones y procedimientos menores sin trasladar al animal.",
-  },
-  {
-    icon: "beaker",
-    title: "Laboratorio y diagnóstico móvil",
-    description:
-      "Pruebas rápidas, análisis sanguíneo y evaluación nutricional con entrega de resultados en sitio.",
-  },
-  {
-    icon: "paw-print",
-    title: "Atención a mascotas rurales",
-    description:
-      "Vacunas, esterilización y control de enfermedades zoonóticas para perros y gatos que viven en el campo.",
-  },
-];
+const services: Service[] = SERVICES;
 ---
 
 <section id="servicios" class="services">
@@ -40,7 +16,7 @@ const services = [
   <div class="services-grid">
     {
       services.map((service) => (
-        <article class="service-card" key={service.title}>
+        <article class="service-card">
           <div class="service-icon" aria-hidden="true">
             <Icon name={service.icon} size={24} strokeWidth={1.8} />
           </div>

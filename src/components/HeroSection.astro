@@ -1,70 +1,62 @@
 ---
 import Icon from "@components/Icon.astro";
+import {
+  HERO_DEFAULT_DESCRIPTION,
+  HERO_DEFAULT_HIGHLIGHTS,
+  HERO_DEFAULT_SERVICE_HOURS_LABEL,
+  HERO_DEFAULT_STATS,
+} from "../utils/constants";
+import { formatServiceHours } from "../utils/helpers";
+import type { CompanyStatistic, ServiceHours } from "../types/company";
+
+interface HeroSectionProps {
+  companyName?: string;
+  tagline?: string;
+  description?: string[] | null;
+  highlights?: string[] | null;
+  stats?: CompanyStatistic[] | null;
+  whatsappLink?: string | null;
+  serviceHours?: ServiceHours | null;
+}
 
 const {
   companyName = "Ponyvet",
   tagline = "Veterinaria rural a domicilio",
-  description = [],
-  highlights = [],
-  stats = [],
+  description,
+  highlights,
+  stats,
   whatsappLink,
   serviceHours,
-} = Astro.props;
+} = Astro.props as HeroSectionProps;
 
-const heroDescription = description.length
-  ? description
-  : [
-      "Consultas preventivas, seguimiento sanitario y atención a urgencias dentro de nuestro horario extendido. Nuestro equipo móvil llega directamente a tu rancho o comunidad con el equipamiento necesario.",
-    ];
+const descriptionList = description ?? [];
+const highlightsList = highlights ?? [];
+const statsList = stats ?? [];
 
-const defaultHighlights = [
-  "Respuesta garantizada en menos de 24 horas dentro del Valle Verde",
-  "Clínica móvil equipada para ganado, equinos y mascotas rurales",
-  "Atendemos de lunes a domingo de 8:00 a 19:00 hrs",
-];
+const heroDescription: string[] =
+  descriptionList.length > 0 ? descriptionList : HERO_DEFAULT_DESCRIPTION;
 
 const highlightsToDisplay =
-  highlights.length > 0 ? highlights : defaultHighlights;
+  highlightsList.length > 0 ? highlightsList : HERO_DEFAULT_HIGHLIGHTS;
 
-const defaultStats = [
-  { value: "+350", label: "visitas a campo cada año" },
-  { value: "96%", label: "casos resueltos sin traslado" },
-];
-
-const statsToDisplay = stats.length > 0 ? stats : defaultStats;
-
-const formatServiceHours = (hours) => {
-  if (!hours) return null;
-  const { days, opening, closing } = hours;
-
-  if (days && opening && closing) {
-    return `${opening} a ${closing} hrs, ${days.toLowerCase()}`;
-  }
-
-  if (opening && closing) {
-    return `${opening} a ${closing} hrs`;
-  }
-
-  return days ?? null;
-};
+const statsToDisplay: CompanyStatistic[] =
+  statsList.length > 0 ? statsList : HERO_DEFAULT_STATS;
 
 const serviceHoursLabel =
-  formatServiceHours(serviceHours) ?? "8:00 a 19:00 hrs, todos los días";
+  formatServiceHours(serviceHours) ?? HERO_DEFAULT_SERVICE_HOURS_LABEL;
 ---
 
 <section class="hero" id="inicio">
   <div class="hero-content">
     <span class="eyebrow">{tagline}</span>
     <h1>{companyName} llega a tu rancho para cuidar a tus animales</h1>
-    {
-      heroDescription.map((paragraph, index) => (
-        <p key={`hero-description-${index}`}>{paragraph}</p>
-      ))
-    }
+    {heroDescription.map((paragraph) => (
+      <p>{paragraph}</p>
+    ))}
     <div class="cta-group">
       <a
         class="cta primary"
-        href={whatsappLink}
+        href={whatsappLink ?? "#contacto"}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -78,7 +70,7 @@ const serviceHoursLabel =
     </div>
     <ul class="hero-highlights">
       {highlightsToDisplay.map((highlight) => (
-        <li key={highlight}>
+        <li>
           <Icon name="check" class="list-icon" size={18} aria-hidden="true" />
           {highlight}
         </li>
@@ -93,7 +85,7 @@ const serviceHoursLabel =
     </p>
     <dl class="stats">
       {statsToDisplay.map((item) => (
-        <div key={item.value}>
+        <div>
           <dt>{item.value}</dt>
           <dd>{item.label}</dd>
         </div>

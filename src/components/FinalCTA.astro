@@ -1,45 +1,29 @@
 ---
 import Icon from "@components/Icon.astro";
+import {
+  CTA_DEFAULT_SERVICE_WINDOW,
+  DEFAULT_EMAIL,
+  DEFAULT_WHATSAPP_LINK,
+} from "../utils/constants";
+import { formatHourRange, formatServiceWindow } from "../utils/helpers";
+import type { ContactInfo, ServiceHours } from "../types/company";
 
-const { contact = {}, serviceHours } = Astro.props;
+interface FinalCTAProps {
+  contact?: ContactInfo | null;
+  serviceHours?: ServiceHours | null;
+}
 
-const formatServiceWindow = (hours) => {
-  if (!hours) return null;
-  const { days, opening, closing } = hours;
+const { contact: rawContact, serviceHours } = Astro.props as FinalCTAProps;
 
-  if (days && opening && closing) {
-    return `de ${days.toLowerCase()} entre las ${opening} y las ${closing} hrs`;
-  }
-
-  if (opening && closing) {
-    return `entre las ${opening} y las ${closing} hrs`;
-  }
-
-  return days ? `de ${days.toLowerCase()}` : null;
-};
-
-const formatContactHours = (value) => {
-  if (!value) return null;
-  const trimmed = value.trim();
-
-  if (trimmed.includes("-")) {
-    const [start, end] = trimmed.split("-").map((segment) => segment.trim());
-    if (start && end) {
-      return `${start} a ${end} hrs`;
-    }
-  }
-
-  return trimmed;
-};
+const contact = rawContact ?? ({} as ContactInfo);
 
 const serviceWindowLabel =
-  formatServiceWindow(serviceHours) ??
-  "de lunes a domingo entre las 8:00 y las 19:00 hrs";
+  formatServiceWindow(serviceHours) ?? CTA_DEFAULT_SERVICE_WINDOW;
 
 const whatsappLink =
-  contact.whatsapp?.link ?? "https://wa.me/524461234567";
-const email = contact.email ?? "contacto@ponyvet.mx";
-const whatsappHoursLabel = formatContactHours(contact.whatsapp?.hours);
+  contact.whatsapp?.link ?? DEFAULT_WHATSAPP_LINK;
+const email = contact.email ?? DEFAULT_EMAIL;
+const whatsappHoursLabel = formatHourRange(contact.whatsapp?.hours);
 ---
 ---
 

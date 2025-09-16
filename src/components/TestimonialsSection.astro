@@ -1,24 +1,7 @@
 ---
-const testimonials = [
-  {
-    quote:
-      "“Desde que Ponyvet nos visita cada mes, bajamos los casos de mastitis y mejoramos la producción de leche sin salir del rancho.”",
-    author: "María López",
-    role: "Rancho El Encino, Valle Verde",
-  },
-  {
-    quote:
-      "“Ponyvet acude rápido en urgencias y mantiene a la cooperativa informada con reportes claros. Son parte de nuestro equipo.”",
-    author: "Cooperativa San Miguel",
-    role: "Productores de caprinos",
-  },
-  {
-    quote:
-      "“El laboratorio móvil de Ponyvet nos da resultados al momento. Así podemos tomar decisiones sin perder días de trabajo.”",
-    author: "Pedro Hernández",
-    role: "Comunidad La Esperanza",
-  },
-];
+import { TESTIMONIALS, type Testimonial } from "../utils/constants";
+
+const testimonials: Testimonial[] = TESTIMONIALS;
 ---
 
 <section id="testimonios" class="testimonials-section">
@@ -32,7 +15,7 @@ const testimonials = [
   <div class="testimonial-grid">
     {
       testimonials.map((testimonial) => (
-        <figure class="testimonial-card" key={testimonial.author}>
+        <figure class="testimonial-card">
           <blockquote>{testimonial.quote}</blockquote>
           <figcaption>
             {testimonial.author}
