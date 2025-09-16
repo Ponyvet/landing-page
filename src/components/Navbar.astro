@@ -1,0 +1,98 @@
+---
+const { phoneNumber, phoneDisplay } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="logo">Ponyvet</div>
+  <nav class="nav-links" aria-label="Navegación principal">
+    <a href="#inicio">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="#beneficios">Beneficios</a>
+    <a href="#testimonios">Testimonios</a>
+    <a href="#cobertura">Cobertura</a>
+  </nav>
+  <a class="contact-phone" href={`tel:${phoneNumber}`}>
+    Llámanos de 8 a 19 h al {phoneDisplay}
+  </a>
+</header>
+
+<style>
+  .site-header {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+    padding: 1.5rem 0 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--primary);
+  }
+
+  .contact-phone {
+    margin-left: auto;
+    background: var(--primary);
+    color: #fff;
+    text-decoration: none;
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .contact-phone:hover {
+    transform: translateY(-2px);
+    background: var(--primary-dark);
+    box-shadow: 0 20px 45px -35px rgba(26, 77, 104, 0.6);
+  }
+
+  @media (max-width: 900px) {
+    .site-header {
+      justify-content: center;
+    }
+
+    .contact-phone {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .nav-links {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

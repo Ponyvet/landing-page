@@ -1,0 +1,103 @@
+---
+const benefits = [
+  {
+    title: "Equipo especializado rural",
+    description:
+      "Veterinarios con experiencia en producción bovina, caprina y equina, certificados en medicina preventiva.",
+  },
+  {
+    title: "Transparencia y seguimiento",
+    description:
+      "Reportes digitales después de cada visita, historial compartido y recordatorios de vacunación sin costo extra.",
+  },
+  {
+    title: "Planes flexibles",
+    description:
+      "Paquetes mensuales y atención por evento para adaptarnos a las necesidades de cada rancho o comunidad.",
+  },
+];
+---
+
+<section id="beneficios" class="benefits">
+  <div class="section-heading">
+    <h2>¿Por qué elegir Ponyvet?</h2>
+    <p>
+      Diseñamos cada visita pensando en los caminos de terracería y las
+      distancias largas de las comunidades rurales.
+    </p>
+  </div>
+  <ul class="feature-list">
+    {
+      benefits.map((benefit) => (
+        <li key={benefit.title}>
+          <h3>{benefit.title}</h3>
+          <p>{benefit.description}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .benefits {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 60ch;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font-size: clamp(1.9rem, 1.7rem + 0.7vw, 2.4rem);
+    letter-spacing: -0.01em;
+  }
+
+  .section-heading p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .feature-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+
+  .feature-list li {
+    background: var(--surface);
+    border-radius: 20px;
+    padding: 1.75rem;
+    box-shadow: 0 24px 60px -42px rgba(17, 34, 44, 0.45);
+    border-left: 5px solid var(--accent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feature-list h3 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+
+  .feature-list p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 640px) {
+    .feature-list li {
+      padding: 1.5rem;
+    }
+  }
+</style>

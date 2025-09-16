@@ -1,0 +1,138 @@
+---
+import Icon from "@components/Icon.astro";
+
+const services = [
+  {
+    icon: "clipboard-check",
+    title: "Consultas preventivas y planes sanitarios",
+    description:
+      "Calendarios de vacunación, desparasitación y chequeos generales para mantener al hato saludable todo el año.",
+  },
+  {
+    icon: "briefcase-medical",
+    title: "Emergencias y cirugías de campo",
+    description:
+      "Atención prioritaria dentro del horario extendido para partos complicados, lesiones y procedimientos menores sin trasladar al animal.",
+  },
+  {
+    icon: "beaker",
+    title: "Laboratorio y diagnóstico móvil",
+    description:
+      "Pruebas rápidas, análisis sanguíneo y evaluación nutricional con entrega de resultados en sitio.",
+  },
+  {
+    icon: "paw-print",
+    title: "Atención a mascotas rurales",
+    description:
+      "Vacunas, esterilización y control de enfermedades zoonóticas para perros y gatos que viven en el campo.",
+  },
+];
+---
+
+<section id="servicios" class="services">
+  <div class="section-heading">
+    <h2>Servicios veterinarios a domicilio</h2>
+    <p>
+      Diseñados para productores y familias rurales que necesitan soluciones
+      inmediatas y confiables sin mover a sus animales.
+    </p>
+  </div>
+  <div class="services-grid">
+    {
+      services.map((service) => (
+        <article class="service-card" key={service.title}>
+          <div class="service-icon" aria-hidden="true">
+            <Icon name={service.icon} size={24} strokeWidth={1.8} />
+          </div>
+          <h3>{service.title}</h3>
+          <p>{service.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .services {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+  }
+
+  .section-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 60ch;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+    font-size: clamp(1.9rem, 1.7rem + 0.7vw, 2.4rem);
+    letter-spacing: -0.01em;
+  }
+
+  .section-heading p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .services-grid {
+    margin-top: 2.5rem;
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .service-card {
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 1.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0 24px 60px -42px rgba(17, 34, 44, 0.45);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(42, 111, 151, 0.08);
+    pointer-events: none;
+  }
+
+  .service-icon {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 16px;
+    background: rgba(42, 111, 151, 0.12);
+    display: grid;
+    place-items: center;
+    color: var(--primary);
+  }
+
+  .service-icon svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .service-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .service-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 640px) {
+    .service-card {
+      padding: 1.5rem;
+    }
+  }
+</style>

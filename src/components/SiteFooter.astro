@@ -1,0 +1,122 @@
+---
+const { phoneNumber, phoneDisplay, whatsappLink, email, currentYear } =
+  Astro.props;
+---
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Ponyvet</div>
+      <p class="footer-description">
+        Veterinaria móvil especializada en comunidades rurales del Valle Verde.
+        Contigo los siete días de la semana.
+      </p>
+    </div>
+    <nav class="footer-nav" aria-label="Navegación secundaria">
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#cobertura">Cobertura</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="footer-contact">
+      <span>Teléfono: <a href={`tel:${phoneNumber}`}>{phoneDisplay}</a></span>
+      <span>
+        WhatsApp (8:00 a 19:00 h):
+        <a href={whatsappLink} target="_blank" rel="noopener noreferrer"
+          >{phoneDisplay}</a
+        >
+      </span>
+      <span>Correo: <a href={`mailto:${email}`}>{email}</a></span>
+      <span>Ubicación base: Valle Verde, Querétaro</span>
+    </div>
+  </div>
+  <p class="footer-meta">
+    © {currentYear} Ponyvet. Todos los derechos reservados.
+  </p>
+</footer>
+
+<style>
+  footer {
+    background: #112433;
+    color: #d7e4ef;
+    padding: 3rem 0 2rem;
+    margin-top: 6rem;
+  }
+
+  .footer-inner {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    align-items: start;
+  }
+
+  .footer-logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .footer-description {
+    margin: 0.75rem 0 0;
+    color: rgba(215, 228, 239, 0.75);
+    max-width: 32ch;
+  }
+
+  .footer-nav {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .footer-nav a {
+    color: rgba(215, 228, 239, 0.85);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .footer-nav a:hover {
+    color: #fff;
+  }
+
+  .footer-contact {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .footer-contact span {
+    color: rgba(215, 228, 239, 0.75);
+    font-size: 0.95rem;
+  }
+
+  .footer-contact a {
+    color: #f4f9fb;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .footer-contact a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-meta {
+    margin-top: 2rem;
+    text-align: center;
+    color: rgba(215, 228, 239, 0.55);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 640px) {
+    .footer-inner {
+      text-align: center;
+    }
+
+    .footer-nav,
+    .footer-contact {
+      justify-items: center;
+    }
+  }
+</style>
