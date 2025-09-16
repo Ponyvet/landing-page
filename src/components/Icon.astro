@@ -11,14 +11,6 @@ import {
   Smartphone,
 } from "@lucide/astro";
 
-const {
-  name,
-  size = 24,
-  strokeWidth = 1.75,
-  class: className = "",
-  ...rest
-} = Astro.props;
-
 const icons = {
   "arrow-down": ArrowDown,
   beaker: Beaker,
@@ -31,7 +23,26 @@ const icons = {
   smartphone: Smartphone,
 } as const;
 
-const IconComponent = icons[name as keyof typeof icons];
+type IconName = keyof typeof icons;
+
+type IconProps = {
+  name: IconName;
+  size?: number;
+  strokeWidth?: number;
+  class?: string;
+} & Record<string, unknown>;
+
+const props = Astro.props as IconProps;
+
+const {
+  name,
+  size = 24,
+  strokeWidth: strokeWidthValue = 1.75,
+  class: className = "",
+  ...rest
+} = props;
+
+const IconComponent = icons[name];
 
 if (!IconComponent) {
   throw new Error(`Icon "${name}" no definido.`);
@@ -40,7 +51,7 @@ if (!IconComponent) {
 
 <IconComponent
   size={size}
-  strokeWidth={strokeWidth}
+  stroke-width={strokeWidthValue}
   class={className || undefined}
   {...rest}
 />
