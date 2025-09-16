@@ -1,9 +1,9 @@
 ---
-const { phoneNumber, phoneDisplay } = Astro.props;
+const { brandName = "Ponyvet", phoneNumber, phoneDisplay } = Astro.props;
 ---
 
 <header class="site-header">
-  <div class="logo">Ponyvet</div>
+  <div class="logo">{brandName}</div>
   <nav class="nav-links" aria-label="Navegación principal">
     <a href="#inicio">Inicio</a>
     <a href="#servicios">Servicios</a>

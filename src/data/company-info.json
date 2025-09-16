@@ -1,0 +1,69 @@
+{
+  "company": {
+    "name": "Ponyvet",
+    "tagline": "Veterinaria rural a domicilio",
+    "description": [
+      "Veterinaria móvil especializada en comunidades rurales del Valle Verde. Contigo los siete días de la semana.",
+      "Consultas preventivas, seguimiento sanitario y atención a urgencias dentro de nuestro horario extendido. Nuestro equipo móvil llega directamente a tu rancho o comunidad con el equipamiento necesario."
+    ],
+    "baseLocation": {
+      "community": "Valle Verde",
+      "state": "Querétaro",
+      "country": "México"
+    },
+    "serviceHours": {
+      "days": "Lunes a domingo",
+      "opening": "08:00",
+      "closing": "19:00",
+      "notes": [
+        "Visitas programadas y atención urgente dentro del horario",
+        "Confirmación previa vía WhatsApp"
+      ]
+    },
+    "coverage": {
+      "radius": "50 km alrededor del Valle Verde",
+      "areas": [
+        "Valle Verde",
+        "San Miguel de la Sierra",
+        "La Esperanza",
+        "Rancho El Encino",
+        "Puente de Piedra",
+        "Santa Lucía"
+      ],
+      "travelPolicy": "Sin costo de desplazamiento hasta 30 km"
+    },
+    "highlights": [
+      "Respuesta garantizada en menos de 24 horas dentro del Valle Verde",
+      "Clínica móvil equipada para ganado, equinos y mascotas rurales",
+      "Atendemos de lunes a domingo de 8:00 a 19:00 hrs"
+    ],
+    "statistics": [
+      {
+        "value": "+350",
+        "label": "visitas a campo cada año"
+      },
+      {
+        "value": "96%",
+        "label": "casos resueltos sin traslado"
+      }
+    ],
+    "seo": {
+      "title": "Ponyvet | Veterinaria a domicilio para comunidades rurales",
+      "description": "Atención veterinaria móvil para ganado, equinos y mascotas en zonas rurales del Valle Verde. Consultas preventivas, apoyo en urgencias dentro del horario y planes sanitarios sin salir del predio."
+    }
+  },
+  "contact": {
+    "phone": {
+      "international": "+524461234567",
+      "display": "(446) 123 4567",
+      "hours": "08:00-19:00"
+    },
+    "whatsapp": {
+      "link": "https://wa.me/524461234567",
+      "hours": "08:00-19:00",
+      "notes": "Confirmación previa vía WhatsApp"
+    },
+    "email": "contacto@ponyvet.mx",
+    "baseLocation": "Valle Verde, Querétaro"
+  }
+}
