@@ -3,12 +3,12 @@
     "name": "Ponyvet",
     "tagline": "Veterinaria rural a domicilio",
     "description": [
-      "Veterinaria móvil especializada en comunidades rurales del Valle Verde. Contigo los siete días de la semana.",
-      "Consultas preventivas, seguimiento sanitario y atención a urgencias dentro de nuestro horario extendido. Nuestro equipo móvil llega directamente a tu rancho o comunidad con el equipamiento necesario."
+      "Brindamos servicios veterinarios a domicilio especializados en comunidades rurales del municipio de San Salvador, Hidalgo y zonas aledañas. Estamos contigo los siete días de la semana para cuidar la salud de tus animales.",
+      "Ofrecemos consultas preventivas, seguimiento sanitario y atención de urgencias dentro de nuestro amplio horario. Nuestro equipo móvil llega directamente hasta tu rancho o comunidad con todo el equipo necesario para brindar la mejor atención."
     ],
     "baseLocation": {
-      "community": "Valle Verde",
-      "state": "Querétaro",
+      "community": "San Salvador",
+      "state": "Hidalgo",
       "country": "México"
     },
     "serviceHours": {
@@ -16,54 +16,53 @@
       "opening": "08:00",
       "closing": "19:00",
       "notes": [
-        "Visitas programadas y atención urgente dentro del horario",
-        "Confirmación previa vía WhatsApp"
+        "Visitas programadas y atención de urgencias dentro del horario",
+        "Confirmación previa vía WhatsApp",
+        "Emergencias fuera de horario disponibles con costo adicional"
       ]
     },
     "coverage": {
-      "radius": "50 km alrededor del Valle Verde",
+      "radius": "30 km desde San Salvador, Hidalgo",
       "areas": [
-        "Valle Verde",
-        "San Miguel de la Sierra",
-        "La Esperanza",
-        "Rancho El Encino",
-        "Puente de Piedra",
-        "Santa Lucía"
+        "San Salvador, Hidalgo",
+        "Actopan",
+        "Francisco I. Madero",
+        "El Arenal"
       ],
-      "travelPolicy": "Sin costo de desplazamiento hasta 30 km"
+      "travelPolicy": "Sin costo de traslado dentro de los primeros 30 km"
     },
     "highlights": [
-      "Respuesta garantizada en menos de 24 horas dentro del Valle Verde",
-      "Clínica móvil equipada para ganado, equinos y mascotas rurales",
-      "Atendemos de lunes a domingo de 8:00 a 19:00 hrs"
+      "Respuesta garantizada en menos de 24 horas en toda la región",
+      "Clínica móvil completamente equipada para ganado, equinos y mascotas",
+      "Servicio disponible de lunes a domingo de 8:00 a 19:00 hrs"
     ],
     "statistics": [
       {
         "value": "+350",
-        "label": "visitas a campo cada año"
+        "label": "visitas realizadas cada año"
       },
       {
         "value": "96%",
-        "label": "casos resueltos sin traslado"
+        "label": "casos resueltos sin necesidad de traslado"
       }
     ],
     "seo": {
-      "title": "Ponyvet | Veterinaria a domicilio para comunidades rurales",
-      "description": "Atención veterinaria móvil para ganado, equinos y mascotas en zonas rurales del Valle Verde. Consultas preventivas, apoyo en urgencias dentro del horario y planes sanitarios sin salir del predio."
+      "title": "Ponyvet | Veterinaria a domicilio para comunidades rurales en Hidalgo",
+      "description": "Atención veterinaria móvil especializada para ganado, equinos y mascotas en zonas rurales de Hidalgo. Consultas preventivas, atención de urgencias y planes sanitarios sin que tengas que salir de tu propiedad."
     }
   },
   "contact": {
     "phone": {
-      "international": "+524461234567",
-      "display": "(446) 123 4567",
+      "international": "+527721041190",
+      "display": "(772) 104-1190",
       "hours": "08:00-19:00"
     },
     "whatsapp": {
-      "link": "https://wa.me/524461234567",
+      "link": "https://wa.me/527721041190",
       "hours": "08:00-19:00",
-      "notes": "Confirmación previa vía WhatsApp"
+      "notes": "Agenda tu cita previa vía WhatsApp"
     },
-    "email": "contacto@ponyvet.mx",
-    "baseLocation": "Valle Verde, Querétaro"
+    "email": "clinica.ponyvet@gmail.com",
+    "baseLocation": "San Salvador, Hidalgo, México"
   }
 }
