@@ -1,100 +1,119 @@
 ---
 const {
-        title = 'Ponyvet | Veterinaria a domicilio para comunidades rurales',
-        description =
-                'Atención veterinaria móvil para ganado, equinos y mascotas rurales con visitas programadas directamente en tu comunidad.',
+  title = "Ponyvet | Veterinaria a domicilio para comunidades rurales",
+  description = "Atención veterinaria móvil para ganado, equinos y mascotas rurales con visitas programadas directamente en tu comunidad.",
 } = Astro.props;
 const fontHref =
-        'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap';
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap";
 ---
+
 <!doctype html>
 <html lang="es">
-        <head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="description" content={description} />
-                <meta name="generator" content={Astro.generator} />
-                <meta name="theme-color" content="#2A6F97" />
-                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-                <link href={fontHref} rel="stylesheet" />
-                <title>{title}</title>
-                <meta property="og:title" content={title} />
-                <meta property="og:description" content={description} />
-                <meta property="og:type" content="website" />
-        </head>
-        <body>
-                <div class="page">
-                        <slot />
-                </div>
-        </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#2A6F97" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href={fontHref} rel="stylesheet" />
+    <title>{title}</title>
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <div class="page">
+      <slot />
+    </div>
+  </body>
 </html>
 
 <style is:global>
-        :root {
-                color-scheme: light;
-                --primary: #2a6f97;
-                --primary-dark: #1e4d68;
-                --accent: #f2a65a;
-                --bg: #f4f9fb;
-                --surface: #ffffff;
-                --text: #1e2a32;
-                --muted: #556c76;
-                --shadow: 0 32px 80px -44px rgba(17, 34, 44, 0.45);
-        }
+  :root {
+    color-scheme: light;
+    --primary: #2a6f97;
+    --primary-dark: #1e4d68;
+    --accent: #f2a65a;
+    --bg: #f4f9fb;
+    --surface: #ffffff;
+    --text: #1e2a32;
+    --muted: #556c76;
+    --shadow: 0 32px 80px -44px rgba(17, 34, 44, 0.45);
+  }
 
-        *,
-        *::before,
-        *::after {
-                box-sizing: border-box;
-        }
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-        html {
-                scroll-behavior: smooth;
-        }
+  html {
+    scroll-behavior: smooth;
+  }
 
-        body {
-                margin: 0;
-                font-family: 'Poppins', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-                background: var(--bg);
-                color: var(--text);
-                min-height: 100vh;
-                line-height: 1.6;
-        }
+  body {
+    margin: 0;
+    font-family:
+      "Poppins",
+      "Inter",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
 
-        body::before {
-                content: '';
-                position: fixed;
-                inset: 0;
-                pointer-events: none;
-                background:
-                        radial-gradient(circle at 15% 20%, rgba(42, 111, 151, 0.18), transparent 55%),
-                        radial-gradient(circle at 85% 10%, rgba(242, 166, 90, 0.18), transparent 45%),
-                        radial-gradient(circle at 20% 85%, rgba(30, 77, 104, 0.16), transparent 55%);
-                z-index: -1;
-        }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        circle at 15% 20%,
+        rgba(42, 111, 151, 0.18),
+        transparent 55%
+      ),
+      radial-gradient(
+        circle at 85% 10%,
+        rgba(242, 166, 90, 0.18),
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 20% 85%,
+        rgba(30, 77, 104, 0.16),
+        transparent 55%
+      );
+    z-index: -1;
+  }
 
-        .page {
-                position: relative;
-                overflow-x: hidden;
-        }
+  .page {
+    position: relative;
+    overflow-x: hidden;
+  }
 
-        a {
-                color: inherit;
-        }
+  a {
+    color: inherit;
+  }
 
-        img {
-                max-width: 100%;
-                height: auto;
-                display: block;
-        }
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 
-        strong {
-                font-weight: 600;
-        }
+  strong {
+    font-weight: 600;
+  }
 
-        ::selection {
-                background: rgba(242, 166, 90, 0.5);
-        }
+  ::selection {
+    background: rgba(242, 166, 90, 0.5);
+  }
 </style>

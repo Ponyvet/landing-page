@@ -1,0 +1,157 @@
+---
+const { phoneNumber, phoneDisplay, whatsappLink, email } = Astro.props;
+
+const coverageAreas = [
+  "Valle Verde",
+  "San Miguel de la Sierra",
+  "La Esperanza",
+  "Rancho El Encino",
+  "Puente de Piedra",
+  "Santa Lucía",
+];
+---
+
+<section id="cobertura" class="coverage">
+  <div class="coverage-text">
+    <h2>Zona de cobertura</h2>
+    <p>
+      Atendemos ranchos, ejidos y comunidades dentro de un radio de 50 km
+      alrededor del Valle Verde. Llegamos por caminos de terracería con unidades
+      4x4 y kits completos de atención.
+    </p>
+    <ul class="coverage-list">
+      {coverageAreas.map((area) => <li key={area}>{area}</li>)}
+    </ul>
+    <span class="coverage-badge">Sin costo de desplazamiento hasta 30 km</span>
+  </div>
+  <div class="coverage-panels">
+    <div class="panel">
+      <h3>Horarios de visita</h3>
+      <ul>
+        <li>Lunes a domingo: 8:00 - 19:00 hrs</li>
+        <li>Visitas programadas y atención urgente dentro del horario</li>
+        <li>Confirmación previa vía WhatsApp</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Contactos directos</h3>
+      <p>
+        Resolvemos dudas y programamos visitas durante el horario de atención.
+      </p>
+      <a href={`tel:${phoneNumber}`}>Llamada directa {phoneDisplay}</a>
+      <a href={whatsappLink} target="_blank" rel="noopener noreferrer"
+        >WhatsApp de 8:00 a 19:00 hrs</a
+      >
+      <a href={`mailto:${email}`}>{email}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .coverage {
+    width: min(1100px, 92vw);
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: start;
+  }
+
+  .coverage-text {
+    background: var(--surface);
+    border-radius: 28px;
+    padding: 2.5rem;
+    box-shadow: 0 28px 70px -45px rgba(17, 34, 44, 0.45);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .coverage-text p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .coverage-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .coverage-list li {
+    background: rgba(42, 111, 151, 0.12);
+    border-radius: 999px;
+    padding: 0.65rem 1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    text-align: center;
+  }
+
+  .coverage-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(242, 166, 90, 0.25);
+    color: var(--primary-dark);
+    padding: 0.65rem 1.1rem;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  .coverage-panels {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .panel {
+    background: var(--surface);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 24px 60px -42px rgba(17, 34, 44, 0.45);
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .panel h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+
+  .panel ul {
+    margin: 0;
+    padding-left: 1.1rem;
+    color: var(--muted);
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.95rem;
+  }
+
+  .panel p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .panel a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .panel a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .coverage {
+      grid-template-columns: 1fr;
+    }
+
+    .coverage-text,
+    .panel {
+      padding: 1.5rem;
+    }
+  }
+</style>
