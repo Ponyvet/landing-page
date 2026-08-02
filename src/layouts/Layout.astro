@@ -5,7 +5,7 @@ const {
     "Atención veterinaria móvil para ganado, equinos y mascotas rurales con visitas programadas directamente en tu comunidad.",
 } = Astro.props;
 const fontHref =
-  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;500;600;700&display=swap";
+  "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap";
 ---
 
 <!doctype html>
@@ -15,7 +15,7 @@ const fontHref =
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#2A6F97" />
+    <meta name="theme-color" content="#0891B2" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,14 +35,96 @@ const fontHref =
 <style is:global>
   :root {
     color-scheme: light;
-    --primary: #2a6f97;
-    --primary-dark: #1e4d68;
-    --accent: #f2a65a;
-    --bg: #f4f9fb;
-    --surface: #ffffff;
-    --text: #1e2a32;
-    --muted: #556c76;
-    --shadow: 0 32px 80px -44px rgba(17, 34, 44, 0.45);
+
+    /* Brand scale */
+    --pv-teal-900: #053a4a;
+    --pv-teal-800: #065e75;
+    --pv-teal-700: #077693;
+    --pv-teal-600: #0891b2;
+    --pv-teal-500: #22a3c2;
+    --pv-teal-300: #7dcbdd;
+    --pv-teal-100: #d5eef4;
+    --pv-teal-50: #eef8fb;
+    --pv-navy-900: #0f1f33;
+    --pv-navy-800: #162c48;
+    --pv-navy-700: #1e3a5f;
+    --pv-navy-500: #33547d;
+    --pv-navy-400: #6a86a4;
+    --pv-navy-300: #8ea4bd;
+    --pv-gold-600: #b8834b;
+    --pv-gold-500: #c79561;
+    --pv-gold-400: #d4a574;
+    --pv-gold-200: #e8cfae;
+    --pv-gold-100: #f4e8da;
+    --pv-line: #dbe6ea;
+
+    /* Semantic */
+    --background: #fafcfd;
+    --foreground: #1e3a5f;
+    --card: #ffffff;
+    --card-foreground: var(--foreground);
+    --primary: var(--pv-teal-600);
+    --primary-foreground: #fafafa;
+    --secondary: #eef6f8;
+    --secondary-foreground: var(--foreground);
+    --muted-foreground: #5b6b80;
+    --accent: var(--pv-gold-400);
+    --accent-foreground: #402c17;
+    --border: var(--pv-line);
+
+    /* Radius */
+    --radius: 0.625rem;
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --radius-2xl: calc(var(--radius) + 8px);
+    --radius-full: 9999px;
+
+    /* Elevation */
+    --shadow-xs: 0 1px 2px 0 rgb(15 31 51 / 0.05);
+    --shadow-sm:
+      0 1px 3px 0 rgb(15 31 51 / 0.08), 0 1px 2px -1px rgb(15 31 51 / 0.06);
+    --shadow-md:
+      0 4px 6px -1px rgb(15 31 51 / 0.08), 0 2px 4px -2px rgb(15 31 51 / 0.06);
+    --shadow-lg:
+      0 10px 15px -3px rgb(15 31 51 / 0.1), 0 4px 6px -4px rgb(15 31 51 / 0.06);
+
+    /* Motion */
+    --duration-fast: 150ms;
+    --duration: 200ms;
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-control:
+      color var(--duration-fast) var(--ease-standard),
+      background-color var(--duration-fast) var(--ease-standard),
+      box-shadow var(--duration-fast) var(--ease-standard);
+
+    /* Typography */
+    --font-sans:
+      ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+      "Helvetica Neue", Arial, sans-serif;
+    --font-display: "Montserrat", var(--font-sans);
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --leading-tight: 1.25;
+    --leading-snug: 1.375;
+    --leading-normal: 1.5;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-extrabold: 800;
+    --tracking-tight: -0.02em;
+    --tracking-wide: 0.06em;
+
+    /* Layout */
+    --section-max: 72rem;
   }
 
   *,
@@ -57,42 +139,11 @@ const fontHref =
 
   body {
     margin: 0;
-    font-family:
-      "Poppins",
-      "Inter",
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: var(--font-sans);
+    background: var(--background);
+    color: var(--foreground);
     min-height: 100vh;
     line-height: 1.6;
-  }
-
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(
-        circle at 15% 20%,
-        rgba(42, 111, 151, 0.18),
-        transparent 55%
-      ),
-      radial-gradient(
-        circle at 85% 10%,
-        rgba(242, 166, 90, 0.18),
-        transparent 45%
-      ),
-      radial-gradient(
-        circle at 20% 85%,
-        rgba(30, 77, 104, 0.16),
-        transparent 55%
-      );
-    z-index: -1;
   }
 
   .page {
@@ -111,10 +162,10 @@ const fontHref =
   }
 
   strong {
-    font-weight: 600;
+    font-weight: var(--weight-semibold);
   }
 
   ::selection {
-    background: rgba(242, 166, 90, 0.5);
+    background: var(--pv-teal-100);
   }
 </style>

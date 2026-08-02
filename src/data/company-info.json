@@ -31,9 +31,49 @@
       "travelPolicy": "Sin costo de traslado dentro de los primeros 30 km"
     },
     "highlights": [
-      "Respuesta garantizada en menos de 24 horas en toda la región",
-      "Clínica móvil completamente equipada para ganado, equinos y mascotas",
-      "Servicio disponible de lunes a domingo de 8:00 a 19:00 hrs"
+      {
+        "icon": "clock",
+        "title": "Respuesta en menos de 24 horas",
+        "description": "Garantizada en toda la región, con confirmación previa por WhatsApp."
+      },
+      {
+        "icon": "truck",
+        "title": "Clínica móvil equipada",
+        "description": "Completamente equipada para ganado, equinos y mascotas."
+      },
+      {
+        "icon": "calendar-days",
+        "title": "Los siete días de la semana",
+        "description": "Servicio de lunes a domingo de 8:00 a 19:00 hrs."
+      }
+    ],
+    "servicesCatalog": [
+      { "name": "Extirpar tumores", "type": "Cirugía", "animals": ["Perros"] },
+      { "name": "Esterilización perros hembras", "type": "Cirugía", "animals": ["Perros"] },
+      { "name": "Esterilización perros machos", "type": "Cirugía", "animals": ["Perros"] },
+      { "name": "Esterilización gatos hembra", "type": "Cirugía", "animals": ["Gatos"] },
+      { "name": "Esterilización gatos macho", "type": "Cirugía", "animals": ["Gatos"] },
+      { "name": "Inseminación de cerdas", "type": "Inseminación", "animals": ["Porcinos"] },
+      { "name": "Enyesar fractura", "type": "Tratamiento", "animals": ["General"] },
+      { "name": "Vacunación múltiple", "type": "Vacunación", "animals": ["Perros"] },
+      { "name": "Tratamiento becerros", "type": "Medicación", "animals": ["Bovinos"] },
+      { "name": "Desparasitación de becerros", "type": "Desparasitación", "animals": ["Bovinos"] },
+      { "name": "Vacunación múltiple cachorros 6 semanas", "type": "Vacunación", "animals": ["Perros"] },
+      { "name": "Asistencia de parto", "type": "Consulta", "animals": ["Ovinos", "Porcinos"] },
+      { "name": "Vacuna porcina", "type": "Vacunación", "animals": ["Porcinos"] },
+      { "name": "Consulta seguimiento", "type": "Consulta", "animals": ["General"] },
+      { "name": "Vacunación rabia", "type": "Vacunación", "animals": ["Perros", "Gatos"] },
+      { "name": "Vacunación gatos", "type": "Vacunación", "animals": ["Gatos"] },
+      { "name": "Tratamiento borregos", "type": "Medicación", "animals": ["Ovinos"] },
+      { "name": "Consulta urgencias", "type": "Consulta", "animals": ["General"] },
+      { "name": "Castración puercos", "type": "Cirugía", "animals": ["Porcinos"] },
+      { "name": "Desparasitación perro raza grande", "type": "Desparasitación", "animals": ["Perros"] },
+      { "name": "Aretar", "type": "Otros", "animals": ["Ovinos", "Bovinos", "Porcinos"] },
+      { "name": "Desparasitación perro raza pequeña", "type": "Desparasitación", "animals": ["Perros"] },
+      { "name": "Consulta general", "type": "Consulta", "animals": ["General"] },
+      { "name": "Desparasitación de borregos", "type": "Desparasitación", "animals": ["Ovinos"] },
+      { "name": "Hierro lechones", "type": "Prevención", "animals": ["Porcinos"] },
+      { "name": "Vacuna de pollo", "type": "Vacunación", "animals": ["Aves"] }
     ],
     "statistics": [
       {
@@ -52,16 +92,17 @@
   },
   "contact": {
     "phone": {
-      "international": "+527721041190",
-      "display": "(772) 104-1190",
+      "international": "+527721541841",
+      "display": "(772) 154-1841",
       "hours": "08:00-19:00"
     },
     "whatsapp": {
-      "link": "https://wa.me/527721041190",
+      "link": "https://wa.me/527721541841",
       "hours": "08:00-19:00",
       "notes": "Agenda tu cita previa vía WhatsApp"
     },
     "email": "clinica.ponyvet@gmail.com",
-    "baseLocation": "San Salvador, Hidalgo, México"
+    "baseLocation": "San Salvador, Hidalgo, México",
+    "facebook": "https://www.facebook.com/clinicaponyvet"
   }
 }

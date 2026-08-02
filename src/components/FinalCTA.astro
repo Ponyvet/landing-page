@@ -1,182 +1,95 @@
 ---
-import Icon from "@components/Icon.astro";
-
-type ServiceHours = {
-  days?: string;
-  opening?: string;
-  closing?: string;
-};
+import Section from "@components/ui/Section.astro";
+import Button from "@components/ui/Button.astro";
 
 type ContactDetails = {
-  whatsapp?: {
-    link?: string;
-    hours?: string | null;
-  };
+  whatsapp?: { link?: string };
   email?: string;
 };
 
-type FinalCTAProps = {
+interface Props {
   contact?: ContactDetails;
-  serviceHours?: ServiceHours;
-};
+}
 
-const { contact, serviceHours } = Astro.props satisfies FinalCTAProps;
+const { contact } = Astro.props satisfies Props;
 
-const formatServiceWindow = (
-  hours: ServiceHours | null | undefined,
-): string | null => {
-  if (!hours) return null;
-  const { days, opening, closing } = hours;
-
-  if (days && opening && closing) {
-    return `de ${days.toLowerCase()} entre las ${opening} y las ${closing} hrs`;
-  }
-
-  if (opening && closing) {
-    return `entre las ${opening} y las ${closing} hrs`;
-  }
-
-  return days ? `de ${days.toLowerCase()}` : null;
-};
-
-const formatContactHours = (value: string | null | undefined): string | null => {
-  if (!value) return null;
-  const trimmed = value.trim();
-
-  if (trimmed.includes("-")) {
-    const [start, end] = trimmed.split("-").map((segment) => segment.trim());
-    if (start && end) {
-      return `${start} a ${end} hrs`;
-    }
-  }
-
-  return trimmed;
-};
-
-const serviceWindowLabel =
-  formatServiceWindow(serviceHours) ??
-  "de lunes a domingo entre las 8:00 y las 19:00 hrs";
-
-const whatsappLink =
-  contact?.whatsapp?.link ?? "https://wa.me/524461234567";
-const email = contact?.email ?? "contacto@ponyvet.mx";
-const whatsappHoursLabel = formatContactHours(contact?.whatsapp?.hours ?? null);
+const whatsappLink = contact?.whatsapp?.link ?? "https://wa.me/527721541841";
+const email = contact?.email ?? "clinica.ponyvet@gmail.com";
 ---
 
-
-<section id="contacto" class="cta-final">
-  <h2>Coordinemos la próxima visita de Ponyvet</h2>
-  <p>
-    Agenda hoy mismo y asegura el bienestar de tu ganado, caballos o mascotas
-    rurales. Nuestro equipo recorre tu comunidad {serviceWindowLabel}.
-  </p>
-  <div class="cta-group">
-    <a
-      class="cta primary"
-      href={whatsappLink}
-      target="_blank"
-      rel="noopener noreferrer"
-      title={
-        whatsappHoursLabel
-          ? `Horario de WhatsApp: ${whatsappHoursLabel}`
-          : undefined
-      }
-    >
-      <Icon name="message-circle" class="icon" size={20} aria-hidden="true" />
-      Reservar por WhatsApp
-    </a>
-    <a class="cta secondary" href={`mailto:${email}`}>
-      <Icon name="mail" class="icon" size={20} aria-hidden="true" />
-      Escríbenos un correo
-    </a>
+<Section id="contacto" background="navy" ariaLabel="Contacto">
+  <div class="cta-grid">
+    <div class="cta-text">
+      <h2>Agenda tu cita previa vía WhatsApp</h2>
+      <p>Atendemos de 08:00 a 19:00, los siete días de la semana.</p>
+    </div>
+    <div class="cta-buttons">
+      <Button
+        size="lg"
+        icon="whatsapp"
+        href={whatsappLink}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        WhatsApp
+      </Button>
+      <Button size="lg" variant="outline" icon="mail" href={`mailto:${email}`} class="cta-email">
+        {email}
+      </Button>
+    </div>
   </div>
-</section>
+</Section>
 
 <style>
-  .cta-final {
-    width: min(1100px, 92vw);
-    margin: 0 auto;
-    margin-top: 1rem;
-    background: linear-gradient(145deg, #1e4d68 0%, #16364b 100%);
-    color: #eaf4fb;
-    padding: 4rem 2rem;
-    border-radius: 36px;
-    text-align: center;
-    box-shadow: 0 36px 80px -48px rgba(14, 40, 56, 0.78);
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: center;
   }
 
-  .cta-final h2 {
-    margin: 0;
-    font-size: clamp(2rem, 1.8rem + 0.8vw, 2.6rem);
+  .cta-text {
+    display: grid;
+    gap: 12px;
   }
 
-  .cta-final p {
-    margin: 1rem auto 2.5rem;
-    max-width: 48ch;
-    color: rgba(234, 244, 251, 0.85);
+  .cta-text h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
   }
 
-  .cta-group {
+  .cta-text p {
+    font-size: var(--text-lg);
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .cta-buttons {
     display: flex;
+    gap: 0.75rem;
     flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
   }
 
-  .cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.6rem;
-    border-radius: 999px;
-    font-weight: 600;
-    text-decoration: none;
-    transition:
-      transform 0.25s ease,
-      box-shadow 0.25s ease,
-      background 0.25s ease,
-      color 0.25s ease;
-  }
-
-  .cta.primary {
-    background: var(--primary);
+  /* Repeated class beats Button's own higher-specificity scoped rules. */
+  :global(.cta-email.cta-email.cta-email) {
+    background: transparent;
     color: #fff;
-    box-shadow: var(--shadow);
+    border-color: rgba(255, 255, 255, 0.35);
   }
 
-  .cta.primary:hover {
-    transform: translateY(-2px);
-    background: var(--primary-dark);
+  :global(.cta-email.cta-email.cta-email:hover) {
+    background: rgba(255, 255, 255, 0.1);
   }
 
-  .cta.secondary {
-    background: rgba(255, 255, 255, 0.18);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.32);
-  }
-
-  .cta.secondary:hover {
-    background: rgba(255, 255, 255, 0.28);
-  }
-
-  .cta .icon {
-    width: 1.1rem;
-    height: 1.1rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  @media (max-width: 640px) {
-    .cta-group {
-      flex-direction: column;
-      align-items: stretch;
+  @media (max-width: 900px) {
+    .cta-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
     }
 
-    .cta {
+    .cta-buttons {
       justify-content: center;
-      width: 100%;
     }
   }
 </style>

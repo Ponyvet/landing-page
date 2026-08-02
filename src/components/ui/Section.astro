@@ -1,0 +1,50 @@
+---
+interface Props {
+  id?: string;
+  background?: "default" | "muted" | "navy";
+  ariaLabel?: string;
+  class?: string;
+}
+
+const { id, background = "default", ariaLabel, class: className } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-label={ariaLabel}
+  class:list={["section", `section-${background}`, className]}
+>
+  <div class="section-inner">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: 5rem 1.5rem;
+  }
+
+  .section-inner {
+    max-width: var(--section-max);
+    margin: 0 auto;
+  }
+
+  .section-default {
+    background: var(--background);
+  }
+
+  .section-muted {
+    background: var(--secondary);
+  }
+
+  .section-navy {
+    background: var(--pv-navy-700);
+    color: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .section {
+      padding: 3.5rem 1.25rem;
+    }
+  }
+</style>

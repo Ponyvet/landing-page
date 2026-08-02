@@ -1,0 +1,44 @@
+---
+import Icon from "@components/Icon.astro";
+
+interface Props {
+  icon:
+    | "calendar-days"
+    | "check"
+    | "clock"
+    | "mail"
+    | "map-pin"
+    | "message-circle"
+    | "phone"
+    | "truck";
+  size?: number;
+  class?: string;
+}
+
+const { icon, size = 16, class: className } = Astro.props;
+---
+
+<div class:list={["icon-row", className]}>
+  <span class="icon-row-media"><Icon name={icon} size={size} /></span>
+  <span class="icon-row-text"><slot /></span>
+</div>
+
+<style>
+  .icon-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .icon-row-media {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--primary);
+  }
+
+  .icon-row-text {
+    font-size: var(--text-sm);
+  }
+</style>

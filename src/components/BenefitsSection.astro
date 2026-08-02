@@ -1,4 +1,8 @@
 ---
+import Section from "@components/ui/Section.astro";
+import SectionTitle from "@components/ui/SectionTitle.astro";
+import IconCircle from "@components/ui/IconCircle.astro";
+
 const benefits = [
   {
     title: "Equipo especializado rural",
@@ -18,86 +22,53 @@ const benefits = [
 ];
 ---
 
-<section id="beneficios" class="benefits">
-  <div class="section-heading">
-    <h2>¿Por qué elegir Ponyvet?</h2>
-    <p>
-      Diseñamos cada visita pensando en los caminos de terracería y las
-      distancias largas de las comunidades rurales.
-    </p>
+<Section id="beneficios" ariaLabel="Beneficios">
+  <SectionTitle
+    eyebrow="Beneficios"
+    title="¿Por qué elegir Ponyvet?"
+    lead="Diseñamos cada visita pensando en los caminos de terracería y las distancias largas de las comunidades rurales."
+  />
+  <div class="ledger">
+    {benefits.map((benefit) => (
+      <div class="ledger-row">
+        <IconCircle name="check" tone="accent" size={18} />
+        <div>
+          <span class="ledger-title">{benefit.title}</span>
+          <p class="ledger-description">{benefit.description}</p>
+        </div>
+      </div>
+    ))}
   </div>
-  <ul class="feature-list">
-    {
-      benefits.map((benefit) => (
-        <li>
-          <h3>{benefit.title}</h3>
-          <p>{benefit.description}</p>
-        </li>
-      ))
-    }
-  </ul>
-</section>
+</Section>
 
 <style>
-  .benefits {
-    width: min(1100px, 92vw);
-    margin: 0 auto;
+  .ledger {
     display: grid;
-    gap: 2.5rem;
   }
 
-  .section-heading {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    max-width: 60ch;
-  }
-
-  .section-heading h2 {
-    margin: 0;
-    font-size: clamp(1.9rem, 1.7rem + 0.7vw, 2.4rem);
-    letter-spacing: -0.01em;
-  }
-
-  .section-heading p {
-    margin: 0;
-    color: var(--muted);
-  }
-
-  .feature-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  .ledger-row {
     display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: auto 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--border);
   }
 
-  .feature-list li {
-    background: var(--surface);
-    border-radius: 20px;
-    padding: 1.75rem;
-    box-shadow: 0 24px 60px -42px rgba(17, 34, 44, 0.45);
-    border-left: 5px solid var(--accent);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  .ledger-row:last-child {
+    border-bottom: 1px solid var(--border);
   }
 
-  .feature-list h3 {
+  .ledger-title {
+    display: block;
+    margin-bottom: 6px;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+  }
+
+  .ledger-description {
     margin: 0;
-    font-size: 1.15rem;
-  }
-
-  .feature-list p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.95rem;
-  }
-
-  @media (max-width: 640px) {
-    .feature-list li {
-      padding: 1.5rem;
-    }
+    max-width: 42rem;
+    color: var(--muted-foreground);
   }
 </style>

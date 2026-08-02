@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div role="separator" class:list={["separator", className]} />
+
+<style>
+  .separator {
+    height: 1px;
+    width: 100%;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+</style>

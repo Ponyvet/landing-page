@@ -1,11 +1,11 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "@components/Navbar.astro";
-import HeroSection from "@components/HeroSection.astro";
-import ServicesSection from "@components/ServicesSection.astro";
+import SiteHeader from "@components/SiteHeader.astro";
+import Hero from "@components/Hero.astro";
+import HighlightsSection from "@components/HighlightsSection.astro";
+import ServiceCatalogSection from "@components/ServiceCatalogSection.astro";
 import HowItWorksSection from "@components/HowItWorksSection.astro";
 import BenefitsSection from "@components/BenefitsSection.astro";
-import TestimonialsSection from "@components/TestimonialsSection.astro";
 import CoverageSection from "@components/CoverageSection.astro";
 import FinalCTA from "@components/FinalCTA.astro";
 import SiteFooter from "@components/SiteFooter.astro";
@@ -13,8 +13,6 @@ import companyInfo from "../data/company-info.json";
 
 const { company, contact } = companyInfo;
 
-const phoneNumber = contact.phone.international;
-const phoneDisplay = contact.phone.display;
 const whatsappLink = contact.whatsapp.link;
 const pageTitle = company.seo.title;
 const pageDescription = company.seo.description;
@@ -22,48 +20,30 @@ const currentYear = new Date().getFullYear();
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <Navbar
-    brandName={company.name}
-    phoneNumber={phoneNumber}
-    phoneDisplay={phoneDisplay}
-  />
+  <SiteHeader brandName={company.name} whatsappLink={whatsappLink} />
   <main>
-    <HeroSection
-      companyName={company.name}
+    <Hero
       tagline={company.tagline}
       description={company.description}
-      highlights={company.highlights}
       stats={company.statistics}
       whatsappLink={whatsappLink}
-      serviceHours={company.serviceHours}
+      phoneNumber={contact.phone.international}
+      phoneDisplay={contact.phone.display}
+      baseLocation={company.baseLocation}
+      coverageRadius={company.coverage.radius}
     />
-    <ServicesSection />
+    <HighlightsSection highlights={company.highlights} />
+    <ServiceCatalogSection services={company.servicesCatalog} />
     <HowItWorksSection />
     <BenefitsSection />
-    <TestimonialsSection />
-    <CoverageSection
-      coverage={company.coverage}
-      serviceHours={company.serviceHours}
-      contact={contact}
-      baseLocation={company.baseLocation}
-    />
-    <FinalCTA contact={contact} serviceHours={company.serviceHours} />
+    <CoverageSection coverage={company.coverage} serviceHours={company.serviceHours} />
+    <FinalCTA contact={contact} />
   </main>
   <SiteFooter
     companyName={company.name}
-    tagline={company.tagline}
     description={company.description}
     contact={contact}
-    baseLocation={company.baseLocation}
+    coverageAreas={company.coverage.areas}
     currentYear={currentYear}
   />
 </Layout>
-
-<style>
-  main {
-    display: flex;
-    flex-direction: column;
-    gap: 6rem;
-    padding: 2rem 0 6rem;
-  }
-</style>

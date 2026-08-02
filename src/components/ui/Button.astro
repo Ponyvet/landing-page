@@ -1,0 +1,135 @@
+---
+import Icon from "@components/Icon.astro";
+import { Icon as BrandIcon } from "astro-icon/components";
+
+const brandIcons = { whatsapp: "simple-icons:whatsapp", facebook: "simple-icons:facebook" } as const;
+
+interface Props {
+  href?: string;
+  variant?: "default" | "outline" | "secondary" | "ghost";
+  size?: "default" | "sm" | "lg";
+  icon?:
+    | "calendar-days"
+    | "check"
+    | "clock"
+    | "mail"
+    | "map-pin"
+    | "message-circle"
+    | "phone"
+    | "truck"
+    | keyof typeof brandIcons;
+  iconSize?: number;
+  target?: string;
+  rel?: string;
+  class?: string;
+}
+
+const {
+  href,
+  variant = "default",
+  size = "default",
+  icon,
+  iconSize = 18,
+  target,
+  rel,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? "a" : "button";
+---
+
+<Tag
+  href={href}
+  target={target}
+  rel={rel}
+  type={href ? undefined : "button"}
+  class:list={["btn", `btn-${variant}`, `btn-size-${size}`, className]}
+  {...rest}
+>
+  {icon && icon in brandIcons ? (
+    <BrandIcon name={brandIcons[icon as keyof typeof brandIcons]} size={iconSize} />
+  ) : icon ? (
+    <Icon name={icon} size={iconSize} />
+  ) : null}
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-weight: var(--weight-medium);
+    line-height: 1;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition-control);
+  }
+
+  .btn:hover {
+    text-decoration: none;
+  }
+
+  .btn-size-default {
+    height: 2.25rem;
+    padding: 0 16px;
+    font-size: var(--text-sm);
+  }
+
+  .btn-size-sm {
+    height: 2rem;
+    padding: 0 12px;
+    gap: 6px;
+    font-size: var(--text-sm);
+  }
+
+  .btn-size-lg {
+    height: 2.75rem;
+    padding: 0 24px;
+    font-size: var(--text-base);
+  }
+
+  .btn-default {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .btn-default:hover {
+    background: color-mix(in oklch, var(--primary) 90%, transparent);
+  }
+
+  .btn-outline {
+    background: var(--background);
+    color: var(--foreground);
+    border-color: var(--border);
+    box-shadow: var(--shadow-xs);
+  }
+
+  .btn-outline:hover {
+    background: var(--secondary);
+  }
+
+  .btn-secondary {
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+  }
+
+  .btn-secondary:hover {
+    background: color-mix(in oklch, var(--secondary) 80%, transparent);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--foreground);
+  }
+
+  .btn-ghost:hover {
+    background: var(--secondary);
+  }
+</style>

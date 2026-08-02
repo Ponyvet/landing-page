@@ -1,0 +1,25 @@
+---
+interface Props {
+  bordered?: boolean;
+  class?: string;
+}
+
+const { bordered = false, class: className } = Astro.props;
+---
+
+<div class:list={["card-header", { "card-header-bordered": bordered }, className]}>
+  <slot />
+</div>
+
+<style>
+  .card-header {
+    display: grid;
+    gap: 8px;
+    padding: 0 1.5rem;
+  }
+
+  .card-header-bordered {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+</style>

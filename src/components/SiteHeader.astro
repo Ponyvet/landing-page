@@ -1,0 +1,106 @@
+---
+import Button from "@components/ui/Button.astro";
+
+interface Props {
+  brandName?: string;
+  whatsappLink?: string;
+}
+
+const { brandName = "Ponyvet", whatsappLink = "https://wa.me/527721541841" } =
+  Astro.props;
+
+const nav = [
+  { label: "Servicios", href: "#servicios" },
+  { label: "Catálogo", href: "#catalogo" },
+  { label: "Cómo funciona", href: "#como-funciona" },
+  { label: "Beneficios", href: "#beneficios" },
+  { label: "Cobertura", href: "#cobertura" },
+  { label: "Contacto", href: "#contacto" },
+];
+---
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="#inicio" class="brand">
+      <img src="/brand/isotype-teal.png" alt={brandName} />
+    </a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <Button
+      href={whatsappLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      size="sm"
+      icon="whatsapp"
+      iconSize={16}
+    >
+      Agendar por WhatsApp
+    </Button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in oklch, var(--background) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .site-header-inner {
+    max-width: var(--section-max);
+    margin: 0 auto;
+    min-height: 72px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+  }
+
+  .brand img {
+    height: 48px;
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-links a {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--foreground);
+    text-decoration: none;
+  }
+
+  .nav-links a:hover {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  @media (max-width: 900px) {
+    .site-header-inner {
+      justify-content: center;
+      text-align: center;
+    }
+
+    .nav-links {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

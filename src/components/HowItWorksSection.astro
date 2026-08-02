@@ -1,4 +1,7 @@
 ---
+import Section from "@components/ui/Section.astro";
+import SectionTitle from "@components/ui/SectionTitle.astro";
+
 const steps = [
   {
     number: "1",
@@ -21,97 +24,100 @@ const steps = [
 ];
 ---
 
-<section id="como-funciona" class="how-it-works">
-  <div class="section-heading">
-    <h2>Así funciona nuestro servicio</h2>
-    <p>
-      Estamos listos para acompañarte en cada etapa, desde la llamada inicial
-      hasta el seguimiento posterior.
-    </p>
-  </div>
-  <ol class="steps">
-    {
-      steps.map((step) => (
-        <li>
-          <span class="step-number">{step.number}</span>
-          <h3>{step.title}</h3>
-          <p>{step.description}</p>
-        </li>
-      ))
-    }
+<Section id="como-funciona" background="muted" ariaLabel="Cómo funciona">
+  <SectionTitle
+    eyebrow="Proceso"
+    title="Así funciona nuestro servicio"
+    lead="Estamos listos para acompañarte en cada etapa, desde la llamada inicial hasta el seguimiento posterior."
+  />
+  <ol class="route">
+    <span class="route-line" aria-hidden="true"></span>
+    {steps.map((step) => (
+      <li class="route-step">
+        <span class="route-marker">{step.number}</span>
+        <h3>{step.title}</h3>
+        <p>{step.description}</p>
+      </li>
+    ))}
   </ol>
-</section>
+</Section>
 
 <style>
-  .how-it-works {
-    width: min(1100px, 92vw);
-    margin: 0 auto;
-  }
-
-  .section-heading {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    max-width: 60ch;
-  }
-
-  .section-heading h2 {
+  .route {
+    position: relative;
     margin: 0;
-    font-size: clamp(1.9rem, 1.7rem + 0.7vw, 2.4rem);
-    letter-spacing: -0.01em;
-  }
-
-  .section-heading p {
-    margin: 0;
-    color: var(--muted);
-  }
-
-  .steps {
-    margin: 3rem 0 0;
     padding: 0;
     list-style: none;
     display: grid;
-    gap: 1.5rem;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 
-  .steps li {
-    background: var(--surface);
-    border-radius: 22px;
-    padding: 2.2rem 1.75rem 1.75rem;
-    position: relative;
-    box-shadow: 0 24px 60px -42px rgba(17, 34, 44, 0.45);
-  }
-
-  .step-number {
+  .route-line {
     position: absolute;
-    top: -1.3rem;
-    left: 1.75rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    background: var(--accent);
+    top: 17px;
+    left: calc(100% / 6);
+    right: calc(100% / 6);
+    border-top: 2px dashed var(--pv-teal-300);
+  }
+
+  .route-step {
+    position: relative;
+    display: grid;
+    gap: 0.65rem;
+    justify-items: start;
+  }
+
+  .route-marker {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-full);
+    background: var(--primary);
+    color: var(--primary-foreground);
     display: grid;
     place-items: center;
-    font-weight: 700;
-    color: var(--primary-dark);
-    box-shadow: 0 12px 30px -20px rgba(242, 166, 90, 0.6);
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    box-shadow: var(--shadow-sm);
   }
 
-  .steps h3 {
-    margin: 1rem 0 0.5rem;
-    font-size: 1.1rem;
+  .route-step h3 {
+    margin: 0.25rem 0 0;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
   }
 
-  .steps p {
+  .route-step p {
     margin: 0;
-    color: var(--muted);
-    font-size: 0.95rem;
+    color: var(--muted-foreground);
+    font-size: var(--text-sm);
   }
 
-  @media (max-width: 640px) {
-    .steps li {
-      padding: 1.5rem;
+  @media (max-width: 720px) {
+    .route {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      padding-left: 1.125rem;
+    }
+
+    .route-line {
+      top: 0;
+      bottom: 0;
+      left: 17px;
+      right: auto;
+      width: 0;
+      border-top: none;
+      border-left: 2px dashed var(--pv-teal-300);
+    }
+
+    .route-step {
+      padding-left: 1.75rem;
+    }
+
+    .route-marker {
+      position: absolute;
+      top: 0;
+      left: -1.125rem;
     }
   }
 </style>

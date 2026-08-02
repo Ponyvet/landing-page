@@ -1,0 +1,86 @@
+---
+import Section from "@components/ui/Section.astro";
+import SectionTitle from "@components/ui/SectionTitle.astro";
+import IconCircle from "@components/ui/IconCircle.astro";
+
+type Highlight = {
+  icon: string;
+  title: string;
+  description: string;
+};
+
+interface Props {
+  highlights?: Highlight[];
+}
+
+const { highlights = [] } = Astro.props satisfies Props;
+---
+
+<Section id="servicios" ariaLabel="Servicios">
+  <SectionTitle
+    eyebrow="Servicios"
+    title="Atención que llega hasta tu propiedad"
+    lead="Consultas preventivas, atención de urgencias y planes sanitarios sin que tengas que salir de tu propiedad."
+  />
+  <div class="highlights-strip">
+    {highlights.map((highlight) => (
+      <div class="highlight-item">
+        <IconCircle name={highlight.icon} />
+        <span class="highlight-title">{highlight.title}</span>
+        <p class="highlight-description">{highlight.description}</p>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .highlights-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .highlight-item {
+    display: grid;
+    gap: 10px;
+    justify-items: start;
+    padding: 0 2rem;
+    border-left: 1px solid var(--border);
+  }
+
+  .highlight-item:first-child {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .highlight-item:last-child {
+    padding-right: 0;
+  }
+
+  .highlight-title {
+    font-size: var(--text-lg);
+    font-weight: var(--weight-semibold);
+  }
+
+  .highlight-description {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--muted-foreground);
+  }
+
+  @media (max-width: 900px) {
+    .highlights-strip {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .highlight-item {
+      padding: 0 0 0 1.25rem;
+      border-left: 2px solid var(--border);
+    }
+
+    .highlight-item:first-child {
+      padding-left: 1.25rem;
+      border-left: 2px solid var(--border);
+    }
+  }
+</style>

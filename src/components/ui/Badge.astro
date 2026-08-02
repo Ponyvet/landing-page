@@ -1,0 +1,79 @@
+---
+import Icon from "@components/Icon.astro";
+
+interface Props {
+  variant?: "default" | "secondary" | "outline" | "accent";
+  icon?:
+    | "calendar-days"
+    | "check"
+    | "clock"
+    | "mail"
+    | "map-pin"
+    | "message-circle"
+    | "phone"
+    | "truck";
+  iconSize?: number;
+  class?: string;
+}
+
+const { variant = "default", icon, iconSize = 12, class: className } = Astro.props;
+---
+
+<span class:list={["badge", `badge-${variant}`, className]}>
+  {icon && <Icon name={icon} size={iconSize} />}
+  <slot />
+</span>
+
+<style>
+  /*
+    Shaped like the ear tags (aretes) used to identify livestock: a
+    pointed lead with a small punched hole, the mark this clinic leaves
+    on every animal it visits.
+  */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 1px solid transparent;
+    padding: 3px 12px 3px 20px;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    line-height: 1.4;
+    width: fit-content;
+    white-space: nowrap;
+    clip-path: polygon(11px 0, 100% 0, 100% 100%, 11px 100%, 0 50%);
+    -webkit-mask-image: radial-gradient(
+      circle 2.25px at 6px 50%,
+      transparent 99%,
+      #000 100%
+    );
+    mask-image: radial-gradient(
+      circle 2.25px at 6px 50%,
+      transparent 99%,
+      #000 100%
+    );
+  }
+
+  .badge-default {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  .badge-secondary {
+    background: var(--secondary);
+    color: var(--secondary-foreground);
+  }
+
+  .badge-outline {
+    background: transparent;
+    color: var(--foreground);
+    border-color: var(--border);
+  }
+
+  .badge-accent {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+</style>

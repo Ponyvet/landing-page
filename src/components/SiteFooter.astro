@@ -1,226 +1,173 @@
 ---
-type ContactPhone = {
-  international?: string;
-  display?: string;
-  hours?: string | null;
-};
-
-type ContactWhatsapp = {
-  link?: string;
-  hours?: string | null;
-  notes?: string;
-};
+import { Icon } from "astro-icon/components";
+import IconRow from "@components/ui/IconRow.astro";
 
 type ContactDetails = {
-  phone?: ContactPhone;
-  whatsapp?: ContactWhatsapp;
+  phone?: { international?: string; display?: string };
+  whatsapp?: { link?: string };
   email?: string;
   baseLocation?: string;
+  facebook?: string;
 };
 
-type BaseLocation = {
-  community?: string;
-  state?: string;
-};
-
-type SiteFooterProps = {
+interface Props {
   companyName?: string;
-  tagline?: string;
   description?: string[];
   contact?: ContactDetails;
-  baseLocation?: BaseLocation;
+  coverageAreas?: string[];
   currentYear?: number;
-};
+}
 
 const {
   companyName = "Ponyvet",
-  tagline = "Veterinaria rural a domicilio",
   description = [],
   contact,
-  baseLocation,
+  coverageAreas = [],
   currentYear,
-} = Astro.props satisfies SiteFooterProps;
+} = Astro.props satisfies Props;
 
-const formatContactHours = (value: string | null | undefined): string | null => {
-  if (!value) return null;
-  const trimmed = value.trim();
-
-  if (trimmed.includes("-")) {
-    const [start, end] = trimmed.split("-").map((segment) => segment.trim());
-    if (start && end) {
-      return `${start} a ${end} hrs`;
-    }
-  }
-
-  return trimmed;
-};
-
-const phoneNumber = contact?.phone?.international ?? "+524461234567";
-const phoneDisplay = contact?.phone?.display ?? "(446) 123 4567";
-const phoneHoursLabel = formatContactHours(contact?.phone?.hours ?? null);
-
-const whatsappLink = contact?.whatsapp?.link ?? "https://wa.me/524461234567";
-const whatsappHoursLabel = formatContactHours(contact?.whatsapp?.hours ?? null);
-
-const email = contact?.email ?? "contacto@ponyvet.mx";
-
-const contactLocation =
-  contact?.baseLocation ??
-  (baseLocation?.community && baseLocation?.state
-    ? `${baseLocation.community}, ${baseLocation.state}`
-    : "Valle Verde, Querétaro");
-
-const summaryParagraphs: string[] =
-  description.length > 0
-    ? description
-    : [
-        "Veterinaria móvil especializada en comunidades rurales del Valle Verde. Contigo los siete días de la semana.",
-      ];
-
+const phoneDisplay = contact?.phone?.display ?? "(772) 154-1841";
+const whatsappLink = contact?.whatsapp?.link ?? "https://wa.me/527721541841";
+const whatsappHandle = whatsappLink.replace("https://", "");
+const email = contact?.email ?? "clinica.ponyvet@gmail.com";
+const baseLocation = contact?.baseLocation ?? "San Salvador, Hidalgo, México";
+const facebookLink = contact?.facebook;
 const displayYear = currentYear ?? new Date().getFullYear();
 ---
 
-
-<footer>
-  <div class="footer-inner">
-    <div>
-      <div class="footer-logo">{companyName}</div>
-      <span class="footer-tagline">{tagline}</span>
-      {summaryParagraphs.map((text) => (
-        <p class="footer-description">{text}</p>
-      ))}
-    </div>
-    <nav class="footer-nav" aria-label="Navegación secundaria">
-      <a href="#inicio">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#como-funciona">Cómo funciona</a>
-      <a href="#beneficios">Beneficios</a>
-      <a href="#testimonios">Testimonios</a>
-      <a href="#cobertura">Cobertura</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <div class="footer-contact">
-      {phoneNumber && phoneDisplay && (
-        <span>
-          Teléfono:
-          {' '}
-          <a href={`tel:${phoneNumber}`}>{phoneDisplay}</a>
-        </span>
-      )}
-      {whatsappLink && phoneDisplay && (
-        <span>
-          WhatsApp:
-          {' '}
-          <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-            {phoneDisplay}
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="/brand/logo-white.png" alt={companyName} class="footer-logo" />
+      {description.map((paragraph) => <p>{paragraph}</p>)}
+      <div class="social-links">
+        <a
+          class="social-link"
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="WhatsApp"
+        >
+          <Icon name="simple-icons:whatsapp" size={18} />
+        </a>
+        {facebookLink && (
+          <a
+            class="social-link"
+            href={facebookLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <Icon name="simple-icons:facebook" size={18} />
           </a>
-        </span>
-      )}
-      {email && (
-        <span>
-          Correo:
-          {' '}
-          <a href={`mailto:${email}`}>{email}</a>
-        </span>
-      )}
-      {contact?.whatsapp?.notes && <span>{contact.whatsapp.notes}</span>}
-      {contactLocation && <span>Ubicación base: {contactLocation}</span>}
+        )}
+      </div>
+    </div>
+    <div class="footer-column">
+      <span class="footer-heading">Contacto</span>
+      <IconRow icon="phone">{phoneDisplay}</IconRow>
+      <IconRow icon="message-circle">{whatsappHandle}</IconRow>
+      <IconRow icon="mail">{email}</IconRow>
+      <IconRow icon="map-pin">{baseLocation}</IconRow>
+    </div>
+    <div class="footer-column">
+      <span class="footer-heading">Cobertura</span>
+      {coverageAreas.map((area) => <span class="footer-area">{area}</span>)}
     </div>
   </div>
   <p class="footer-meta">
-    © {displayYear} {companyName}. Todos los derechos reservados.
+    © {displayYear} {companyName} Veterinaria · Lunes a domingo, 08:00–19:00
   </p>
 </footer>
 
 <style>
-  footer {
-    background: #112433;
-    color: #d7e4ef;
-    padding: 3rem 0 2rem;
-    margin-top: 6rem;
+  .site-footer {
+    background: var(--pv-navy-900);
+    color: rgba(255, 255, 255, 0.75);
+    padding: 3.5rem 1.5rem 2.5rem;
   }
 
-  .footer-inner {
-    width: min(1100px, 92vw);
+  .footer-grid {
+    max-width: var(--section-max);
     margin: 0 auto;
     display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    align-items: start;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-brand {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
   }
 
   .footer-logo {
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    height: 72px;
+    width: auto;
   }
 
-  .footer-tagline {
-    display: inline-block;
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #f4f9fb;
-    opacity: 0.85;
+  .footer-brand p {
+    font-size: var(--text-sm);
+    max-width: 24rem;
+    margin: 0;
   }
 
-  .footer-description {
-    margin: 0.75rem 0 0;
-    color: rgba(215, 228, 239, 0.75);
-    max-width: 32ch;
+  .social-links {
+    display: flex;
+    gap: 10px;
   }
 
-  .footer-nav {
+  .social-link {
     display: grid;
-    gap: 0.45rem;
-  }
-
-  .footer-nav a {
-    color: rgba(215, 228, 239, 0.85);
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  .footer-nav a:hover {
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
+    transition: var(--transition-control);
   }
 
-  .footer-contact {
-    display: grid;
-    gap: 0.45rem;
-  }
-
-  .footer-contact span {
-    color: rgba(215, 228, 239, 0.75);
-    font-size: 0.95rem;
-  }
-
-  .footer-contact a {
-    color: #f4f9fb;
+  .social-link:hover {
+    background: var(--primary);
     text-decoration: none;
-    font-weight: 600;
   }
 
-  .footer-contact a:hover {
-    text-decoration: underline;
+  .footer-column {
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+
+  .footer-heading {
+    color: #fff;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-semibold);
+  }
+
+  .footer-area {
+    font-size: var(--text-sm);
   }
 
   .footer-meta {
-    margin-top: 2rem;
-    text-align: center;
-    color: rgba(215, 228, 239, 0.55);
-    font-size: 0.8rem;
+    max-width: var(--section-max);
+    margin: 2.5rem auto 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: var(--text-xs);
   }
 
-  @media (max-width: 640px) {
-    .footer-inner {
+  @media (max-width: 700px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
       text-align: center;
     }
 
-    .footer-nav,
-    .footer-contact {
+    .footer-brand {
+      justify-items: center;
+    }
+
+    .footer-column {
       justify-items: center;
     }
   }
